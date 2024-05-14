@@ -9,8 +9,8 @@ namespace BS.Entities.Abstract
 	public abstract class BaseEntity
 	{
 		public int Id { get; set; }
-		public DateTime Created { get; set; }
-		public DateTime? Updated { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public DateTime? UpdatedDate { get; set; }
 
 
 

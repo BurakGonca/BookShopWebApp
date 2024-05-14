@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -20,12 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Profiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\BS.DTO\BS.DTO.csproj" />
     <ProjectReference Include="..\BS.Entities\BS.Entities.csproj" />
   </ItemGroup>
 
