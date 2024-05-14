@@ -23,14 +23,21 @@ namespace BS.Entities.Concrete
         //iliskiler
 
 
+        public int OrderId { get; set; }
         public Order Order { get; set; }
 
 
-        public IQueryable<Book> Books { get; set; }
+        //public IQueryable<Book> Books { get; set; }
 
 
         public int UserId { get; set; }
         public User User { get; set; }
+
+
+        public int BookId { get; set; }
+        public Book Book { get; set; }
+
+
 
 
 

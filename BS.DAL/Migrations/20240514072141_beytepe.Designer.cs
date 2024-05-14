@@ -4,6 +4,7 @@ using BS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BS.DAL.Migrations
 {
     [DbContext(typeof(BSDbContext))]
-    partial class BSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240514072141_beytepe")]
+    partial class beytepe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,6 +190,9 @@ namespace BS.DAL.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("OrderDetailId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
@@ -200,6 +206,9 @@ namespace BS.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderDetailId")
+                        .IsUnique();
 
                     b.HasIndex("PaymentId")
                         .IsUnique();
@@ -229,9 +238,6 @@ namespace BS.DAL.Migrations
                     b.Property<double>("Discount")
                         .HasColumnType("float");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -250,8 +256,6 @@ namespace BS.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("UserId");
 
@@ -395,6 +399,12 @@ namespace BS.DAL.Migrations
 
             modelBuilder.Entity("BS.Entities.Concrete.Order", b =>
                 {
+                    b.HasOne("BS.Entities.Concrete.OrderDetail", "OrderDetail")
+                        .WithOne("Order")
+                        .HasForeignKey("BS.Entities.Concrete.Order", "OrderDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BS.Entities.Concrete.Payment", "Payment")
                         .WithOne("Order")
                         .HasForeignKey("BS.Entities.Concrete.Order", "PaymentId")
@@ -413,6 +423,8 @@ namespace BS.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("OrderDetail");
+
                     b.Navigation("Payment");
 
                     b.Navigation("ShoppingCart");
@@ -428,12 +440,6 @@ namespace BS.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BS.Entities.Concrete.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BS.Entities.Concrete.User", "User")
                         .WithMany("OrderDetails")
                         .HasForeignKey("UserId")
@@ -441,8 +447,6 @@ namespace BS.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-
-                    b.Navigation("Order");
 
                     b.Navigation("User");
                 });
@@ -481,9 +485,10 @@ namespace BS.DAL.Migrations
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("BS.Entities.Concrete.Order", b =>
+            modelBuilder.Entity("BS.Entities.Concrete.OrderDetail", b =>
                 {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("Order")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Payment", b =>

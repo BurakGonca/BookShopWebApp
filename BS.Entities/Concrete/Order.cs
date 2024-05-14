@@ -32,9 +32,11 @@ namespace BS.Entities.Concrete
 
 
 
-        public int OrderDetailId { get; set; }
-        public OrderDetail OrderDetail { get; set; }
+        //public int OrderDetailId { get; set; }
+        //public OrderDetail OrderDetail { get; set; }
 
+
+        public IQueryable<OrderDetail> OrderDetails { get; set; }
 
 
     }

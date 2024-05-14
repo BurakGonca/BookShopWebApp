@@ -25,6 +25,7 @@ namespace BS.Entities.Concrete
         //iliskiler
 
         public IQueryable<Comment>? Comments { get; set; }
+        public IQueryable<OrderDetail>? OrderDetails { get; set; }
 
 
         public int CategoryId { get; set; }
@@ -32,12 +33,12 @@ namespace BS.Entities.Concrete
 
 
 
-        public IQueryable<ShoppingCart> ShoppingCarts { get; set; }
+        //public IQueryable<ShoppingCart> ShoppingCarts { get; set; }
 
 
 
-        public int OrderDetailId { get; set; }
-        public OrderDetail OrderDetail { get; set; }
+        //public int OrderDetailId { get; set; }
+        //public OrderDetail OrderDetail { get; set; }
 
 
 
