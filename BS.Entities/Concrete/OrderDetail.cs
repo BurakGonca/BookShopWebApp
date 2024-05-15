@@ -27,8 +27,7 @@ namespace BS.Entities.Concrete
         public Order Order { get; set; }
 
 
-        //public IQueryable<Book> Books { get; set; }
-
+       
 
         public int UserId { get; set; }
         public User User { get; set; }

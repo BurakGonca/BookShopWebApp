@@ -31,11 +31,6 @@ namespace BS.Entities.Concrete
         public ShoppingCart ShoppingCart { get; set; }
 
 
-
-        //public int OrderDetailId { get; set; }
-        //public OrderDetail OrderDetail { get; set; }
-
-
         public IQueryable<OrderDetail> OrderDetails { get; set; }
 
 

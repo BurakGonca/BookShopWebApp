@@ -14,10 +14,21 @@ namespace BS.DAL.Profiles
         public BookProfile()
         {
 
+			
+
+			CreateMap<Book, BookDto>().ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId));
+
+			CreateMap<Book, BookDto>().ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
+
 			CreateMap<Book, BookDto>().ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails));
-			CreateMap<BookDto, Book>().ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails));
-			CreateMap<BookDto, Book>().ReverseMap();
+
+			CreateMap<CategoryDto, Category>().ReverseMap();
+			CreateMap<CommentDto, Comment>().ReverseMap();
 			CreateMap<OrderDetailDto, OrderDetail>().ReverseMap();
+
+
+			
+
 
 		}
 

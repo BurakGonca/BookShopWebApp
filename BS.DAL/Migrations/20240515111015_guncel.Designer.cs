@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BS.DAL.Migrations
 {
     [DbContext(typeof(BSDbContext))]
-    [Migration("20240514072423_beytepe2")]
-    partial class beytepe2
+    [Migration("20240515111015_guncel")]
+    partial class guncel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace BS.DAL.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageName")
@@ -64,14 +64,14 @@ namespace BS.DAL.Migrations
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Book");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Category", b =>
@@ -86,52 +86,52 @@ namespace BS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             CategoryName = "Novel",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             CategoryName = "Poetry",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             CategoryName = "Biography",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             CategoryName = "Travel",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             CategoryName = "Cooking",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
                             CategoryName = "Science",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -155,13 +155,13 @@ namespace BS.DAL.Migrations
                     b.Property<string>("CommentTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -173,7 +173,7 @@ namespace BS.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Order", b =>
@@ -184,7 +184,7 @@ namespace BS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OrderDate")
@@ -196,7 +196,7 @@ namespace BS.DAL.Migrations
                     b.Property<int>("ShoppingCartId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -212,7 +212,7 @@ namespace BS.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.OrderDetail", b =>
@@ -226,7 +226,7 @@ namespace BS.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("Discount")
@@ -244,7 +244,7 @@ namespace BS.DAL.Migrations
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -258,7 +258,7 @@ namespace BS.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("OrderDetail");
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Payment", b =>
@@ -269,7 +269,7 @@ namespace BS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PaymentDate")
@@ -281,7 +281,7 @@ namespace BS.DAL.Migrations
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -291,7 +291,7 @@ namespace BS.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.ShoppingCart", b =>
@@ -302,7 +302,7 @@ namespace BS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -311,7 +311,7 @@ namespace BS.DAL.Migrations
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -321,7 +321,7 @@ namespace BS.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCart");
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.User", b =>
@@ -336,7 +336,7 @@ namespace BS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -350,7 +350,7 @@ namespace BS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Updated")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
@@ -363,7 +363,7 @@ namespace BS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Book", b =>
