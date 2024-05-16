@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BS.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class guncel : Migration
+    public partial class iki : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

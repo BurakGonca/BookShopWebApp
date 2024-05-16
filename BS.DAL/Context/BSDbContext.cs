@@ -21,20 +21,16 @@ namespace BS.DAL.Context
 		public DbSet<User> Users { get; set; }
 
 
-		
+
+        public BSDbContext(DbContextOptions<BSDbContext> options) : base(options)
+        {
+
+        }
 
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			base.OnConfiguring(optionsBuilder);
-
-			optionsBuilder.UseSqlServer("Data Source=BURAK;Initial Catalog=BookShopDB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
 
 
-		}
-
-
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 

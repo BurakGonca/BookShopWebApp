@@ -1,0 +1,61 @@
+﻿@model BookViewModel
+
+<h1>Kitap Ekle</h1>
+
+<form asp-action="Create" asp-controller="Book" enctype="multipart/form-data">
+    
+    <div class="form-group">
+        <label asp-for="BookName"> </label>
+        <input asp-for="BookName" class="form-control" />
+        <span asp-validation-for="BookName" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorName"> </label>
+        <input asp-for="AuthorName" class="form-control" />
+        <span asp-validation-for="AuthorName" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorSurname"> </label>
+        <input asp-for="AuthorSurname" class="form-control" />
+        <span asp-validation-for="AuthorSurname" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublishDate"> </label>
+        <input asp-for="PublishDate" type="date" class="form-control" />
+        <span asp-validation-for="PublishDate" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"> </label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StockQuantity"> </label>
+        <input asp-for="StockQuantity" class="form-control" />
+        <span asp-validation-for="StockQuantity" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageFile"> </label>
+        <input asp-for="ImageFile" type="file" class="form-control" />
+        <span asp-validation-for="ImageFile" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Category"> </label>
+        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="Category" class="form-text text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">EKLE</button>
+
+</form>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

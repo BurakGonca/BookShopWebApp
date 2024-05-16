@@ -1,6 +1,6 @@
 ﻿using BS.DTO.Abstract;
 using BS.Entities.Concrete;
-using BS.Entities.Enums;
+using BS.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

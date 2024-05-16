@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BS.Entities.Enums
+namespace BS.Enums
 {
 	public enum PaymentStatus
 	{
-		Processing=1,
-        Completed,
-        Cancelled,
-        Failed,
-        Pending
-
+		Processing = 1,
+		Completed,
+		Cancelled,
+		Failed,
+		Pending
 
 	}
 }

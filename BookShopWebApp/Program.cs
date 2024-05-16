@@ -1,3 +1,6 @@
+using BS.DAL.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookShopWebApp
 {
 	public class Program
@@ -6,8 +9,14 @@ namespace BookShopWebApp
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
-			builder.Services.AddControllersWithViews();
+
+			builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti"))); 
+
+
+            
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
 

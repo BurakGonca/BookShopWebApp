@@ -1,0 +1,33 @@
+﻿namespace BookShopWebApp.Models
+{
+	public class OrderViewModel
+	{
+		public int Id { get; set; }
+
+
+		public DateTime OrderDate { get; set; }
+
+
+
+		//iliskiler
+
+		public int PaymentId { get; set; }
+		public PaymentViewModel Payment { get; set; }
+
+
+
+		public int UserId { get; set; }
+		public UserViewModel User { get; set; }
+
+
+
+		public int ShoppingCartId { get; set; }
+		public ShoppingCartViewModel ShoppingCart { get; set; }
+
+
+		public IQueryable<OrderDetailViewModel> OrderDetails { get; set; }
+
+
+		public int RowNum { get; set; }
+	}
+}

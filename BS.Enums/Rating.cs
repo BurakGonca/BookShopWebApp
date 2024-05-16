@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BS.Entities.Enums
+namespace BS.Enums
 {
 	public enum Rating
 	{
@@ -13,8 +13,6 @@ namespace BS.Entities.Enums
 		ThreeStars = 3,
 		FourStars = 4,
 		FiveStars = 5
-
-
 
 	}
 }

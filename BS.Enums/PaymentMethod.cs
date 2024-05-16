@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BS.Entities.Enums
+namespace BS.Enums
 {
-	public enum Gender
+	public enum PaymentMethod
 	{
-		Unknown =1,
-		Male,
-		Female
-
+		CreditCard = 1,
+		EFTOrTransfer,
+		CashOnDelivery,
+		GiftVoucher
 
 	}
 }
