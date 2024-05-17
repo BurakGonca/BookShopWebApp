@@ -25,7 +25,7 @@ namespace BS.BLL.Managers.Abstract
 		public int Delete(TDto dto) { return _service.Delete(dto); }
 
 
-		public IQueryable<TDto> GetAll() { return _service.GetAll(); }
+		public IEnumerable<TDto> GetAll() { return _service.GetAll(); }
 
 
 		public TDto? GetById(int id) { return _service.GetById(id); }

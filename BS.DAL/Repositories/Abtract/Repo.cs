@@ -27,7 +27,7 @@ namespace BS.DAL.Repositories.Abtract
 
 		public int Create(TEntity entity)
 		{
-			
+			entity.CreatedDate = DateTime.Now;
 			entities.Add(entity);
 			return _dbContext.SaveChanges();
 

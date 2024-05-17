@@ -23,12 +23,12 @@ namespace BS.DTO.Concrete
 
 		//iliskiler
 
-		public IQueryable<CommentDto>? Comments { get; set; }
-		public IQueryable<OrderDetailDto>? OrderDetails { get; set; }
+		public IEnumerable<CommentDto>? Comments { get; set; }
+		public IEnumerable<OrderDetailDto>? OrderDetails { get; set; }
 
 
 		public int CategoryId { get; set; }
-		public CategoryDto Category { get; set; }
+		public CategoryDto? Category { get; set; }
 
 
 

@@ -24,12 +24,12 @@ namespace BS.Entities.Concrete
 
         //iliskiler
 
-        public IQueryable<Comment>? Comments { get; set; }
-        public IQueryable<OrderDetail>? OrderDetails { get; set; }
+        public IEnumerable<Comment>? Comments { get; set; }
+        public IEnumerable<OrderDetail>? OrderDetails { get; set; }
 
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
 
 

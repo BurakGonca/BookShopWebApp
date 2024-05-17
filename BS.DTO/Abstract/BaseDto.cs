@@ -9,7 +9,7 @@ namespace BS.DTO.Abstract
 	public abstract class BaseDto
 	{
 
-		int Id { get; set; }
+		public int Id { get; set; }
 		public int RowNum { get; set; }
 
 

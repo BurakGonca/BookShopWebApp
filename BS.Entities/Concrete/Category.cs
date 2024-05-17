@@ -16,7 +16,7 @@ namespace BS.Entities.Concrete
 
         //iliskiler
 
-        public IQueryable<Book> Books { get; set; }
+        public IEnumerable<Book> Books { get; set; }
 
     }
 }

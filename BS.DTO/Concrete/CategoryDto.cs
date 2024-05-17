@@ -15,7 +15,7 @@ namespace BS.DTO.Concrete
 
 		//iliskiler
 
-		public IQueryable<BookDto> Books { get; set; }
+		public IEnumerable<BookDto> Books { get; set; }
 
 
 

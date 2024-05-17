@@ -10,7 +10,7 @@
 		public string AuthorSurname { get; set; }
 
 
-		public DateTime? PublishDate { get; set; }
+		public DateTime? PublishDate { get; set; } = DateTime.Now;
 		public double Price { get; set; }
 		public int StockQuantity { get; set; }
 		public string? ImageName { get; set; }
@@ -20,8 +20,8 @@
 		
 		//iliskiler
 
-		public IQueryable<CommentViewModel>? Comments { get; set; }
-		public IQueryable<OrderDetailViewModel>? OrderDetails { get; set; }
+		public IEnumerable<CommentViewModel>? Comments { get; set; }
+		public IEnumerable<OrderDetailViewModel>? OrderDetails { get; set; }
 
 
 		public int CategoryId { get; set; }

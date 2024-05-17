@@ -47,9 +47,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Category"> </label>
-        <input asp-for="Category" class="form-control" />
-        <span asp-validation-for="Category" class="form-text text-danger"></span>
+        <label asp-for="CategoryId"> </label>
+        <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.CategoryList"></select>
+        <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">EKLE</button>

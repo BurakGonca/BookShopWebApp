@@ -18,9 +18,8 @@ namespace BS.DAL.Services.Abstract
 
 		protected IMapper _mapper;
 		public Repo<TEntity> _repo;
-		private BookRepo repo;
 
-		protected Service(Repo<TEntity> repo)
+		public Service(Repo<TEntity> repo)
 		{
 			MapperConfiguration configuration = new MapperConfiguration(cfg => {
 				cfg.CreateMap<TDto, TEntity>().ReverseMap();
@@ -31,10 +30,10 @@ namespace BS.DAL.Services.Abstract
 			_repo = repo;
 		}
 
-		protected Service(BookRepo repo)
-		{
-			this.repo = repo;
-		}
+		//protected Service(BookRepo repo)
+		//{
+		//	this.repo = repo;
+		//}
 
 		public IMapper Mapper { set { _mapper = value; } }	
 
@@ -51,11 +50,11 @@ namespace BS.DAL.Services.Abstract
 			return _repo.Delete(entity);
 		}
 
-		public IQueryable<TDto> GetAll()
+		public IEnumerable<TDto> GetAll()
 		{
 			IQueryable<TEntity> entities = _repo.GetAll();
 
-			IQueryable<TDto> dtos = _mapper.Map<IQueryable<TDto>>(entities);
+            IEnumerable<TDto> dtos = _mapper.Map<IEnumerable<TDto>>(entities);
 
 			return dtos;
 		}

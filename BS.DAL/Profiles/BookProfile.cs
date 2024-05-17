@@ -16,15 +16,17 @@ namespace BS.DAL.Profiles
 
 			
 
-			CreateMap<Book, BookDto>().ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId));
-
+			CreateMap<Book, BookDto>().ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
 			CreateMap<Book, BookDto>().ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
-
 			CreateMap<Book, BookDto>().ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails));
 
-			CreateMap<CategoryDto, Category>().ReverseMap();
-			CreateMap<CommentDto, Comment>().ReverseMap();
-			CreateMap<OrderDetailDto, OrderDetail>().ReverseMap();
+            CreateMap<BookDto, Book>().ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
+            CreateMap<BookDto, Book>().ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
+            CreateMap<BookDto, Book>().ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails));
+
+            CreateMap<CategoryDto, Category>().ForMember(dest => dest.Books,  opt => opt.Ignore()).ReverseMap();
+			CreateMap<CommentDto, Comment>().ForMember(dest => dest.Book, opt => opt.Ignore()).ReverseMap();
+			CreateMap<OrderDetailDto, OrderDetail>().ForMember(dest =>dest.Book, opt => opt.Ignore()).ReverseMap();
 
 
 			

@@ -1,4 +1,7 @@
+using BS.BLL.Managers.Concrete;
 using BS.DAL.Context;
+using BS.DAL.Repositories.Concrete;
+using BS.DAL.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookShopWebApp
@@ -10,13 +13,22 @@ namespace BookShopWebApp
 			var builder = WebApplication.CreateBuilder(args);
 
 
-			builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti"))); 
+			builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
+
+			
+
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
 
 
-            
+			//dipendency injection baglantilari tanimlama
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+			builder.Services.AddScoped<BookRepo>();
+			builder.Services.AddScoped<BookService>();
+			builder.Services.AddScoped<BookManager>();
+			builder.Services.AddScoped<CategoryRepo>();
+			builder.Services.AddScoped<CategoryService>();
+			builder.Services.AddScoped<CategoryManager>();
 
 			var app = builder.Build();
 

@@ -14,7 +14,7 @@ namespace BS.DAL.Services.Abstract
 		int Update(TDto dto);
 		int Delete(TDto dto);
 
-		IQueryable<TDto> GetAll();
+        IEnumerable<TDto> GetAll();
 
 		TDto GetById(int id);
 
