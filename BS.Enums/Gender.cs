@@ -1,6 +1,6 @@
 ﻿namespace BS.Enums
 {
-	public enum Gender
+	public enum Gender : byte
 	{
 		Unknown = 1,
 		Male,

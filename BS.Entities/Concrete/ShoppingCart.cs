@@ -9,7 +9,10 @@ namespace BS.Entities.Concrete
 {
 	public class ShoppingCart : BaseEntity
 	{
-		public double TotalPrice { get; set; }
+        
+
+
+        public double TotalPrice { get; set; }
         public bool IsActive { get; set; }
 
 
@@ -20,7 +23,7 @@ namespace BS.Entities.Concrete
         public Order Order { get; set; }
 
 
-		//public IQueryable<Book> Books { get; set; }
+        //public IQueryable<Book> Books { get; set; }
 
 
         public int UserId { get; set; }

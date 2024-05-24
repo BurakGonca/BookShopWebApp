@@ -33,5 +33,8 @@ namespace BS.BLL.Managers.Abstract
 
 		public int Update(TDto dto) { return _service.Update(dto); }
 
+
+		
+
 	}
 }

@@ -16,8 +16,8 @@
 
 
 
-		public int UserId { get; set; }
-		public UserViewModel User { get; set; }
+		//public int UserId { get; set; }
+		//public UserViewModel User { get; set; }
 
 
 

@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 namespace BS.Entities.Concrete
 {
 	public class Payment : BaseEntity
-	{
-		public PaymentMethod PaymentMethod { get; set; }
+    {
+
+        
+
+
+
+        public PaymentMethod PaymentMethod { get; set; }
 		public DateTime PaymentDate { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
 

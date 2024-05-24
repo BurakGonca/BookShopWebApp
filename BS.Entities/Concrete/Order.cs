@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 namespace BS.Entities.Concrete
 {
 	public class Order : BaseEntity
-	{
-        		
+    {
+       
+
+
+
         public DateTime OrderDate { get; set; }
 
 

@@ -16,5 +16,7 @@ namespace BS.BLL.Managers.Abstract
 		IEnumerable<TDto> GetAll();
 		TDto? GetById(int id);
 
+		 
+
 	}
 }

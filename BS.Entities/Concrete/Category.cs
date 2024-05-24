@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace BS.Entities.Concrete
 {
 	public class Category : BaseEntity
-	{
+    {
+        
 
         public string CategoryName { get; set; }
 
@@ -16,7 +17,7 @@ namespace BS.Entities.Concrete
 
         //iliskiler
 
-        public IEnumerable<Book> Books { get; set; }
+        public IEnumerable<Book>? Books { get; set; }
 
     }
 }

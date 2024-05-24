@@ -1,32 +1,48 @@
-﻿@model List<CategoryViewModel>
-
-
+﻿
+@model List<CategoryViewModel>
 
 <table class="table table-striped table-hover" style="margin-top:15px; margin-left:12px;">
-	<tr>
-		<td>#</td>
-		<td>Kategori Adı</td>
-		<td>Kitap Sayısı</td>
-		<td>İşlem</td>
-
-
-	</tr>
-	@{
-		foreach (var item in Model)
-		{
-			<tr>
-				<td>@item.RowNum</td>
-				<td>@item.CategoryName</td>
-				<td>@item.Books.Count()</td>
-				
-				<td>
-					<a class="btn btn-info" asp-controller="Book" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
-					<a class="btn btn-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
-				</td>
-
-			</tr>
-		}
-	}
-
-
+    <tr>
+        <td>#</td>
+        <td><strong>Kategori Adı</strong></td>
+        <td><strong>Kitap Sayısı</strong></td>
+        <td><strong>İşlem</strong></td>
+        
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RowNum</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Books.Count()</td>
+                <td>
+                    <a class="btn btn-info" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-danger delete-button" data-book-count="@item.Books.Count()" data-url="@Url.Action("Delete", "Category", new { id = item.Id })">Sil</a>
+                </td>
+            </tr>
+        }
+    }
 </table>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var deleteButtons = document.querySelectorAll(".delete-button");
+
+            deleteButtons.forEach(function (button) {
+                button.addEventListener("click", function (event) {
+                    var bookCount = parseInt(button.getAttribute("data-book-count"));
+                    var deleteUrl = button.getAttribute("data-url");
+
+                    if (bookCount > 0) {
+                        event.preventDefault();
+                        alert("Bu kategoride kitap bulunmaktadır. Kategoriyi silemezsiniz.");
+                    } else {
+                        window.location.href = deleteUrl;
+                    }
+                });
+            });
+        });
+    </script>
+}

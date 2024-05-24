@@ -18,5 +18,7 @@ namespace BS.DAL.Repositories.Abtract
 		IQueryable<TEntity> GetAll();
 
 
+		
+
 	}
 }

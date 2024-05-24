@@ -9,8 +9,10 @@ namespace BS.Entities.Concrete
 {
 	public class Book : BaseEntity, IBook
 	{
+        
 
-		public string BookName { get; set; }
+
+        public string BookName { get; set; }
 		public string AuthorName { get; set; }
 		public string AuthorSurname { get; set; }
 
@@ -30,12 +32,6 @@ namespace BS.Entities.Concrete
 
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
-
-
-
         
-
-
-
     }
 }

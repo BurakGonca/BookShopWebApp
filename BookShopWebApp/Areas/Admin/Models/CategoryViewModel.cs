@@ -1,9 +1,13 @@
-﻿namespace BookShopWebApp.Areas.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BookShopWebApp.Areas.Models
 {
 	public class CategoryViewModel
 	{
 		public int Id { get; set; }
-		public string CategoryName { get; set; }
+
+        [Display(Name = "Kategori Adı")]
+        public string CategoryName { get; set; }
 
 
 
@@ -13,6 +17,8 @@
 
 
 		public int RowNum { get; set; }
+
+		
 
 	}
 }

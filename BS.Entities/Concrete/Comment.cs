@@ -10,6 +10,10 @@ namespace BS.Entities.Concrete
 {
     public class Comment : BaseEntity
     {
+
+
+
+
         public string? CommentTitle { get; set; }
         public string? CommentContent { get; set; }
         public Rating Rating { get; set; }

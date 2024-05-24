@@ -1,0 +1,22 @@
+﻿@model CategoryViewModel
+
+
+
+<div class="container" style="margin-top: 25px;">
+	<h2>Kategoriyi Sil</h2>
+	<h3>@Model.CategoryName</h3>
+
+	<div class="alert alert-danger" role="alert">
+		Kategoriyi silmek istediğinize emin misiniz?
+	</div>
+
+	<form asp-action="Delete" method="post">
+		<input type="hidden" asp-for="Id" />
+		<button type="submit" class="btn btn-danger">Sil</button>
+		<a asp-action="Index" class="btn btn-secondary">İptal</a>
+	</form>
+</div>
+
+@section Scripts {
+	@Html.Partial("_ValidationScriptsPartial")
+}

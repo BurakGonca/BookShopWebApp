@@ -5,20 +5,20 @@
 <table class="table table-striped table-hover" style="margin-top:15px; margin-left:12px;">
 	<tr>
 		<td>#</td>
-		<td>Kitap Adı</td>
-		<td>Yazar Adı</td>
-		<td>Yazar Soyadı</td>
-		<td>Yayın Tarihi</td>
-		<td>Fiyatı</td>
-		<td>Stoğu</td>
-		<td>Resim</td>
-		<td>Kategori</td>
-		<td>İşlem</td>
+		<td><strong>Kitap Adı</strong></td>
+		<td><strong>Yazar Adı</strong></td>
+		<td><strong>Yazar Soyadı</strong></td>
+		<td><strong>Yayın Tarihi</strong></td>
+		<td><strong>Fiyatı</strong></td>
+		<td><strong>Stoğu</strong></td>
+		<td><strong>Resim</strong></td>
+		<td><strong>Kategori</strong></td>
+		<td><strong>İşlem</strong></td>
 
 
 	</tr>
 	@{
-		foreach (var item in Model)
+		foreach (BookViewModel item in Model)
 		{
 			<tr>
 				<td>@item.RowNum</td>
@@ -29,7 +29,7 @@
 				<td>@item.Price</td>
 				<td>@item.StockQuantity</td>
 				<td> <img height="30px" width="30px" src="~/images/@item.ImageName" alt="Resim Yok" /> </td>
-				<td>@item.CategoryId)</td>
+				<td>@item.Category.CategoryName</td>
 												
 				<td>
 					<a class="btn btn-info"  asp-controller="Book" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>

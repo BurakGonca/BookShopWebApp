@@ -20,7 +20,7 @@ namespace BS.DAL.Repositories.Concrete
 
 		public override IQueryable<Book> GetAll()
 		{
-			return _dbContext.Books.Include(b => b.OrderDetails);
+			return _dbContext.Books.Include(b => b.OrderDetails).Include(b=>b.Category);
 
 
 		}

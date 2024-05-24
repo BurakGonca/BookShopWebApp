@@ -4,6 +4,9 @@ using BS.DAL.Repositories.Concrete;
 using BS.DAL.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
 
+using System;
+using BS.Entities.Concrete;
+
 namespace BookShopWebApp
 {
     public class Program
@@ -14,6 +17,8 @@ namespace BookShopWebApp
 
 
             builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
+
+           
 
 
 
@@ -30,6 +35,14 @@ namespace BookShopWebApp
             builder.Services.AddScoped<CategoryRepo>();
             builder.Services.AddScoped<CategoryService>();
             builder.Services.AddScoped<CategoryManager>();
+
+
+
+            //identity ekleme
+
+            //builder.Services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<BSDbContext>();
+
 
             var app = builder.Build();
 
@@ -50,23 +63,21 @@ namespace BookShopWebApp
 
 
 
-            app.MapAreaControllerRoute(
-                name: "Admin_area",
-                areaName: "Admin",
-                pattern: "Admin/{controller=Book}/{action=Index}/{id?}"
-            );
+
 
 
             app.MapControllerRoute(
-                name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-            );
-
+              name: "areas",
+              pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+          );
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}"
             );
+
+
+
 
 
             app.Run();
