@@ -17,16 +17,16 @@ namespace BookShopWebApp.Models
 		//iliskiler
 
 
-		public IQueryable<CommentViewModel>? Comments { get; set; }
+		public IEnumerable<CommentViewModel>? Comments { get; set; }
 
 
-		public IQueryable<OrderViewModel>? Orders { get; set; }
+		public IEnumerable<OrderViewModel>? Orders { get; set; }
 
 
-		public IQueryable<ShoppingCartViewModel> ShoppingCarts { get; set; }
+		public IEnumerable<ShoppingCartViewModel> ShoppingCarts { get; set; }
 
 
-		public IQueryable<OrderDetailViewModel> OrderDetails { get; set; }
+		public IEnumerable<OrderDetailViewModel> OrderDetails { get; set; }
 
 
 		public int RowNum { get; set; }

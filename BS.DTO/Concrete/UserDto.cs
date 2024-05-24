@@ -23,16 +23,16 @@ namespace BS.DTO.Concrete
 		//iliskiler
 
 
-		public IQueryable<CommentDto>? Comments { get; set; }
+		public IEnumerable<CommentDto>? Comments { get; set; }
 
 
-		public IQueryable<OrderDto>? Orders { get; set; }
+		public IEnumerable<OrderDto>? Orders { get; set; }
 
 
-		public IQueryable<ShoppingCartDto> ShoppingCarts { get; set; }
+		public IEnumerable<ShoppingCartDto> ShoppingCarts { get; set; }
 
 
-		public IQueryable<OrderDetailDto> OrderDetails { get; set; }
+		public IEnumerable<OrderDetailDto> OrderDetails { get; set; }
 
 
 	}

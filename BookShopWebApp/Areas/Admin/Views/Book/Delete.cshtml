@@ -1,0 +1,31 @@
+﻿@model BookViewModel
+
+<div class="container" style="margin-top: 25px;">
+	<h2>Kitap Sil</h2>
+	<h3>@Model.BookName</h3>
+
+	<dl class="row">
+		<dt class="col-sm-2">
+			Kitap Adı
+		</dt>
+		<dd class="col-sm-10">
+			@Model.BookName
+		</dd>
+		<dt class="col-sm-2">
+			Yazar Adı
+		</dt>
+		<dd class="col-sm-10">
+			@Model.AuthorName @Model.AuthorSurname
+		</dd>
+	</dl>
+
+	<form asp-action="Delete" method="post">
+		<input type="hidden" asp-for="Id" />
+		<button type="submit" class="btn btn-danger">Sil</button>
+		<a asp-action="Index" class="btn btn-secondary">İptal</a>
+	</form>
+</div>
+
+@section Scripts {
+	@Html.Partial("_ValidationScriptsPartial")
+}

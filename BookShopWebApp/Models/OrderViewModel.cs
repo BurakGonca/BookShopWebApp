@@ -25,7 +25,7 @@
 		public ShoppingCartViewModel ShoppingCart { get; set; }
 
 
-		public IQueryable<OrderDetailViewModel> OrderDetails { get; set; }
+		public IEnumerable<OrderDetailViewModel> OrderDetails { get; set; }
 
 
 		public int RowNum { get; set; }

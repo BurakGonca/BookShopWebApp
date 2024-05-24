@@ -29,7 +29,9 @@ namespace BS.DAL.Profiles
 			CreateMap<OrderDetailDto, OrderDetail>().ForMember(dest =>dest.Book, opt => opt.Ignore()).ReverseMap();
 
 
-			
+			//CreateMap<Category, CategoryDto>().ForMember(dest => dest.Books, opt => opt.Ignore()).ReverseMap();
+			//CreateMap<Comment, CommentDto>().ForMember(dest => dest.Book, opt => opt.Ignore()).ReverseMap();
+			//CreateMap<OrderDetail, OrderDetailDto>().ForMember(dest => dest.Book, opt => opt.Ignore()).ReverseMap();
 
 
 		}

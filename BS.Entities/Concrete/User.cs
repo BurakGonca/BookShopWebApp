@@ -22,16 +22,16 @@ namespace BS.Entities.Concrete
         //iliskiler
 
 
-        public IQueryable<Comment>? Comments { get; set; }
+        public IEnumerable<Comment>? Comments { get; set; }
 
 
-        public IQueryable<Order>? Orders { get; set; }
+        public IEnumerable<Order>? Orders { get; set; }
 
 
-        public IQueryable<ShoppingCart> ShoppingCarts { get; set; }
+        public IEnumerable<ShoppingCart> ShoppingCarts { get; set; }
 
 
-        public IQueryable<OrderDetail> OrderDetails { get; set; }
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
 
 
 
