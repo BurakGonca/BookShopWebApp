@@ -16,5 +16,10 @@ namespace BS.BLL.Managers.Concrete
 		public UserManager(UserService service) : base(service)
 		{
 		}
-	}
+
+        public UserDto? FindLoginUser(string username, string password)
+        {
+            return (base._service as UserService).FindLoginUser(username, password);
+        }
+    }
 }

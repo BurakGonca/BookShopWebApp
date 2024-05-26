@@ -15,12 +15,12 @@ namespace BS.DAL.Profiles
         public PaymentProfile()
         {
 
-			CreateMap<Payment, PaymentDto>()
-				.ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
-				.ReverseMap();
+			CreateMap<Payment, PaymentDto>().ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId)).ReverseMap();
+			CreateMap<PaymentDto, Payment>().ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId)).ReverseMap();
 
+            CreateMap<UserDto, User>().ReverseMap();
 
-		}
+        }
 
     }
 }

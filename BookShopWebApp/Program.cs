@@ -6,35 +6,51 @@ using Microsoft.EntityFrameworkCore;
 
 using System;
 using BS.Entities.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BookShopWebApp
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
 
-            builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
+			//authentication ekleme
+			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+							.AddCookie(opt =>
+							{
+								opt.LoginPath = "/Admin/Account/Login";    //accoount/login
+								opt.LogoutPath = "/Admin/Account/Logout";  //accoount/logout
+							});
 
-           
+
+
+			builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
 
 
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
 
 
-            //dependency injection baglantilari tanimlama
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<BookRepo>();
-            builder.Services.AddScoped<BookService>();
-            builder.Services.AddScoped<BookManager>();
 
-            builder.Services.AddScoped<CategoryRepo>();
-            builder.Services.AddScoped<CategoryService>();
-            builder.Services.AddScoped<CategoryManager>();
+			//dependency injection baglantilari tanimlama
+
+			builder.Services.AddScoped<BookRepo>();
+			builder.Services.AddScoped<BookService>();
+			builder.Services.AddScoped<BookManager>();
+
+			builder.Services.AddScoped<CategoryRepo>();
+			builder.Services.AddScoped<CategoryService>();
+			builder.Services.AddScoped<CategoryManager>();
+
+            builder.Services.AddScoped<UserRepo>();
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<UserManager>();
+
 
 
 
@@ -46,41 +62,63 @@ namespace BookShopWebApp
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment())
+			{
+				app.UseExceptionHandler("/Home/Error");
+				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+				app.UseHsts();
+			}
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
+			app.UseRouting();
 
 
+			//authenticationi kullandirmak için ekledik.
+			app.UseAuthentication();
 
 
+			app.UseAuthorization();
+
+
+
+            //rotalar
+
+            //app.MapControllerRoute(
+            //  name: "areas",
+            //  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            // );
 
 
             app.MapControllerRoute(
               name: "areas",
-              pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+              pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}"
           );
 
+
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"
-            );
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}"
+			);
 
 
 
 
 
-            app.Run();
-        }
-    }
+			app.Run();
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -24,5 +24,15 @@ namespace BS.DAL.Services.Concrete
 
 			base.Mapper = config.CreateMapper();
 		}
+
+
+		public UserDto? FindLoginUser(string userName, string password)
+		{
+            User? user = (base._repo as IUserRepo).FindLoginUser(userName, password);
+
+            return _mapper.Map<UserDto>(user);
+        }
+
+
 	}
 }
