@@ -18,7 +18,7 @@ namespace BS.DAL.Repositories.Concrete
 
 		public override Comment? GetById(int id)
 		{
-			return _dbContext.Comments.Include(x => x.User).Where(x => x.Id == id).SingleOrDefault();
+			return _dbContext.Comments.Include(x => x.AppUser).Where(x => x.Id == id).SingleOrDefault();
 		}
 
 

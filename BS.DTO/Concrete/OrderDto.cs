@@ -21,8 +21,8 @@ namespace BS.DTO.Concrete
 
 
 
-		public int UserId { get; set; }
-		public UserDto User { get; set; }
+		public int AppUserId { get; set; }
+		public AppUserDto AppUser { get; set; }
 
 
 

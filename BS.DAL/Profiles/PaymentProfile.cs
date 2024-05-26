@@ -14,11 +14,38 @@ namespace BS.DAL.Profiles
 
         public PaymentProfile()
         {
+            CreateMap<AppUser, AppUserDto>()
+                           .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
+                           .ForMember(dest => dest.ShoppingCarts, opt => opt.MapFrom(src => src.ShoppingCarts))
+                           .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => src.Orders))
+                           .ReverseMap();
 
-			CreateMap<Payment, PaymentDto>().ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId)).ReverseMap();
-			CreateMap<PaymentDto, Payment>().ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId)).ReverseMap();
+            CreateMap<OrderDetail, OrderDetailDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+                .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
+                .ReverseMap();
 
-            CreateMap<UserDto, User>().ReverseMap();
+
+            CreateMap<Order, OrderDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
+                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
+                .ForMember(dest => dest.Payment, opt => opt.MapFrom(src => src.Payment))
+                .ReverseMap();
+
+
+            CreateMap<ShoppingCart, ShoppingCartDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+
+                .ReverseMap();
+
+            CreateMap<Payment, PaymentDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+
+                .ReverseMap();
 
         }
 

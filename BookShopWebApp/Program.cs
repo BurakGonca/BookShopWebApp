@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using BS.Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using System.Reflection;
+using FluentValidation;
 
 namespace BookShopWebApp
 {
@@ -37,6 +40,8 @@ namespace BookShopWebApp
 			builder.Services.AddControllersWithViews();
 
 
+
+
 			//dependency injection baglantilari tanimlama
 
 			builder.Services.AddScoped<BookRepo>();
@@ -47,17 +52,23 @@ namespace BookShopWebApp
 			builder.Services.AddScoped<CategoryService>();
 			builder.Services.AddScoped<CategoryManager>();
 
-            builder.Services.AddScoped<UserRepo>();
-            builder.Services.AddScoped<UserService>();
-            builder.Services.AddScoped<UserManager>();
 
+
+			//validation ekleme
+            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 
 
             //identity ekleme
 
-            //builder.Services.AddIdentity<User, IdentityRole>()
-            //    .AddEntityFrameworkStores<BSDbContext>();
+            builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
+				.AddEntityFrameworkStores<BSDbContext>();
+
+            //builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+            //             .AddDefaultTokenProviders()
+            //             .AddEntityFrameworkStores<BSDbContext>();         //NOT: geniþletilmemiþ halinde bunu kullanýyoruz
+
+
 
 
             var app = builder.Build();
@@ -76,6 +87,8 @@ namespace BookShopWebApp
 			app.UseRouting();
 
 
+
+
 			//authenticationi kullandirmak için ekledik.
 			app.UseAuthentication();
 
@@ -86,11 +99,7 @@ namespace BookShopWebApp
 
             //rotalar
 
-            //app.MapControllerRoute(
-            //  name: "areas",
-            //  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-            // );
-
+            
 
             app.MapControllerRoute(
               name: "areas",

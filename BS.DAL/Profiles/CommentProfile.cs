@@ -9,17 +9,61 @@ using System.Threading.Tasks;
 
 namespace BS.DAL.Profiles
 {
-	public class CommentProfile : Profile
-	{
-		public CommentProfile()
-		{
-			CreateMap<Comment, CommentDto>()
-				.ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
-				.ForMember(dest => dest.BookId, opt => opt.MapFrom(src => src.BookId))
-				.ReverseMap();
-		}
+    public class CommentProfile : Profile
+    {
+        public CommentProfile()
+        {
+            CreateMap<Comment, CommentDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
+                .ReverseMap();
+
+            CreateMap<Book, BookDto>()
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
+                .ReverseMap();
+
+
+            CreateMap<Category, CategoryDto>()
+                                .ReverseMap();
 
 
 
-	}
+            CreateMap<AppUser, AppUserDto>()
+                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
+                .ForMember(dest => dest.ShoppingCarts, opt => opt.MapFrom(src => src.ShoppingCarts))
+                .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => src.Orders))
+                .ReverseMap();
+
+            CreateMap<OrderDetail, OrderDetailDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+                .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
+                .ReverseMap();
+
+
+            CreateMap<Order, OrderDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
+                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
+                .ForMember(dest => dest.Payment, opt => opt.MapFrom(src => src.Payment))
+                .ReverseMap();
+
+
+            CreateMap<ShoppingCart, ShoppingCartDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+                
+                .ReverseMap();
+
+            CreateMap<Payment, PaymentDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+                
+                .ReverseMap();
+
+        }
+
+
+
+    }
 }

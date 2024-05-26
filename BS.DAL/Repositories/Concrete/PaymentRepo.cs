@@ -20,7 +20,7 @@ namespace BS.DAL.Repositories.Concrete
 
 		public override Payment? GetById(int id)
 		{
-			return _dbContext.Payments.Include(x => x.User).Where(x => x.Id == id).SingleOrDefault();
+			return _dbContext.Payments.Include(x => x.AppUser).Where(x => x.Id == id).SingleOrDefault();
 		}
 
 	}

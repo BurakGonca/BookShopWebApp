@@ -1,10 +1,7 @@
 ﻿@model BookViewModel
 
-
-
 <div class="container" style="margin-top: 25px;">
     <div class="row">
-
         <div class="col-md-8">
             <form asp-action="Edit" asp-controller="Book" enctype="multipart/form-data">
                 <div class="form-group">
@@ -60,12 +57,20 @@
                         <button type="submit" class="btn btn-primary btn-block">DÜZENLE</button>
                     </div>
                 </div>
+
+                <input type="hidden" name="ExistingImageName" value="@ViewBag.PicName" />
             </form>
         </div>
 
-
         <div class="col-md-4">
-            <img src="~/dist/img/1.png" style="width:310px; height:auto" alt="Sample Image" class="img-fluid" />
+            @if (ViewBag.PicName != null)
+            {
+                <img src="~/images/@ViewBag.PicName" alt="Current Image" style="width: 310px; height: auto;" class="img-fluid" />
+            }
+            else
+            {
+                <img src="~/dist/img/1.png" alt="Sample Image" style="width: 310px; height: auto;" class="img-fluid" />
+            }
         </div>
     </div>
 </div>

@@ -19,8 +19,8 @@ namespace BS.DTO.Concrete
 
 		//iliskiler
 
-		public int UserId { get; set; }
-		public UserDto User { get; set; }
+		public int AppUserId { get; set; }
+		public AppUser AppUser { get; set; }
 
 
 		public OrderDto Order { get; set; }

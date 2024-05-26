@@ -2,6 +2,7 @@
 using BookShopWebApp.Areas.Models;
 using BS.BLL.Managers.Concrete;
 using BS.DTO.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BookShopWebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
 
@@ -68,6 +70,39 @@ namespace BookShopWebApp.Areas.Admin.Controllers
         }
 
 
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            CategoryViewModel viewModel = new CategoryViewModel();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(CategoryViewModel model)
+        {
+
+            ModelState.Remove<CategoryViewModel>(m => m.Books);
+
+
+            if (ModelState.IsValid)
+            {
+                CategoryDto dto = _mapper.Map<CategoryDto>(model);
+
+                _categoryManager.Create(dto);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+
+
+
+
+        }
+
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -101,10 +136,10 @@ namespace BookShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(CategoryViewModel model)
         {
-            
+
             if (ModelState.IsValid)
             {
-                
+
                 CategoryDto dto = _mapper.Map<CategoryDto>(model);
                 _categoryManager.Update(dto);
                 return RedirectToAction("Index");

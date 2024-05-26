@@ -8,12 +8,22 @@ using System.Threading.Tasks;
 
 namespace BS.Entities.Concrete
 {
-    public class AppUser :IdentityUser
+    public class AppUser :IdentityUser<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         public Gender Gender { get; set; }
-        
+        public string? Adress { get; set; }
+        public UserType UserType { get; set; }
+
+
+        //iliskiler
+
+        public IEnumerable<Comment>? Comments { get; set; }
+        public IEnumerable<Order>? Orders { get; set; }
+        public IEnumerable<ShoppingCart>? ShoppingCarts { get; set; }
+        public IEnumerable<OrderDetail>? OrderDetails { get; set; }
+
 
 
     }

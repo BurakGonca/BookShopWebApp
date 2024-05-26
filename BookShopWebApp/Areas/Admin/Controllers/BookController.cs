@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BookShopWebApp.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	public class BookController : Controller
+    [Authorize(Roles = "Admin")]
+    public class BookController : Controller
 	{
 		private BookManager _bookManager;
 		private CategoryManager _categoryManager;
@@ -150,75 +151,82 @@ namespace BookShopWebApp.Areas.Admin.Controllers
 			return RedirectToAction("Index");
 		}
 
+				
 
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{
+			
 			BookDto dto = _bookManager.GetById(id);
-
-
 			BookViewModel viewModel = _mapper.Map<BookViewModel>(dto);
 
-
-			//kategori listesi için
-
+			
 			List<CategoryDto> categoryDtos = _categoryManager.GetAll().ToList();
-
-
-			List<SelectListItem> categoryList = new List<SelectListItem>();
-
-			foreach (CategoryDto categoryDto in categoryDtos)
+			List<SelectListItem> categoryList = categoryDtos.Select(categoryDto => new SelectListItem
 			{
-				SelectListItem selectListItem = new SelectListItem();
-				selectListItem.Text = categoryDto.CategoryName;
-				selectListItem.Value = categoryDto.Id.ToString();
+				Text = categoryDto.CategoryName,
+				Value = categoryDto.Id.ToString()
+			}).ToList();
 
-				categoryList.Add(selectListItem);
-			}
-
+		
 			ViewBag.CategoryList = categoryList;
 
-
-			if (viewModel.ImageName == null)
-			{
-				viewModel.ImageName = dto.ImageName;
-
-			}
+			
 			ViewBag.PicName = viewModel.ImageName;
 
+			
 			return View(viewModel);
 		}
 
 		[HttpPost]
 		public IActionResult Edit(BookViewModel model)
 		{
-			if (model.ImageFile is null)
-			{
-				ModelState.Remove<BookViewModel>(m => m.ImageFile);
-			}
-
-
-
 			if (ModelState.IsValid)
 			{
-				if (model.ImageFile != null && model.ImageFile.Name != model.ImageName)
+				
+				if (model.ImageFile == null)
 				{
-					model.ImageName = model.ImageFile.FileName;
-
-					var konum = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", model.ImageFile.FileName);
-
-
-					var akisOrtami = new FileStream(konum, FileMode.Create);
-
-					//Resmi kaydet
-					model.ImageFile.CopyTo(akisOrtami);
+					model.ImageName = Request.Form["ExistingImageName"];
 				}
+				else
+				{
+					
+					if (model.ImageFile.Name != model.ImageName)
+					{
+						model.ImageName = model.ImageFile.FileName;
+						var konum = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", model.ImageFile.FileName);
+						using (var akisOrtami = new FileStream(konum, FileMode.Create))
+						{
+							
+							model.ImageFile.CopyTo(akisOrtami);
+						}
+					}
+				}
+
+				
 				BookDto dto = _mapper.Map<BookDto>(model);
 				_bookManager.Update(dto);
+
+				
 				return RedirectToAction("Index");
 			}
-			return View();
+
+			
+			List<CategoryDto> categoryDtos = _categoryManager.GetAll().ToList();
+			List<SelectListItem> categoryList = categoryDtos.Select(categoryDto => new SelectListItem
+			{
+				Text = categoryDto.CategoryName,
+				Value = categoryDto.Id.ToString()
+			}).ToList();
+
+			ViewBag.CategoryList = categoryList;
+			ViewBag.PicName = model.ImageName;
+
+			
+			return View(model);
 		}
+
+
 
 
 	}

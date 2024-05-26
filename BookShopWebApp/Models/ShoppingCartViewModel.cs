@@ -20,7 +20,7 @@
 
 
 		public int UserId { get; set; }
-		public UserViewModel User { get; set; }
+		public AppUserViewModel User { get; set; }
 
 		public int RowNum { get; set; }
 	}
