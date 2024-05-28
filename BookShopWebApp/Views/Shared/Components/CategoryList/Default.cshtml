@@ -1,0 +1,13 @@
+﻿
+@model List<CategoryViewModel>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li class="nav-item">
+            <a asp-controller="Category" asp-action="Detail" >
+               @item.CategoryName
+            </a>
+        </li>
+    }
+</ul>

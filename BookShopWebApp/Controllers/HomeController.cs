@@ -15,6 +15,8 @@ namespace BookShopWebApp.Controllers
 
 		public IActionResult Index()
 		{
+
+
 			return View();
 		}
 

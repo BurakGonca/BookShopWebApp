@@ -52,10 +52,11 @@ namespace BookShopWebApp
 			builder.Services.AddScoped<CategoryService>();
 			builder.Services.AddScoped<CategoryManager>();
 
+			
 
 
 			//validation ekleme
-            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+			builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 
 

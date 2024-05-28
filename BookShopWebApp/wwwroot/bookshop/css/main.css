@@ -2395,48 +2395,53 @@ span.color-red {
   display: inline-block;
   *display: inline;
 }
-.mainmenu > ul > li > a,
-.mainmenu .mainmenu-submenu-inner > li > a {
-  font-size: 1.2em;
-  padding: 1.2em 1.5em;
-  color: #999;
-  display: inline-block;
-  text-decoration: none;
-}
-.mainmenu > ul > li > a:hover,
-.mainmenu .mainmenu-submenu-inner > li > a:hover {
-  color: #4f8db3;
-  text-decoration: none;
-}
-.mainmenu > ul > li.active > a,
-.mainmenu .mainmenu-submenu-inner > li.active > a {
-  color: #4f8db3;
-  font-weight: 600 !important;
-}
-.mainmenu > ul > li.mainmenu-open a,
-.mainmenu .mainmenu-submenu-inner > li.mainmenu-open a,
-.mainmenu > ul li.mainmenu-open > a:hover,
-.mainmenu .mainmenu-submenu-inner li.mainmenu-open > a:hover {
-  color: #fff;
-  background: #4f8db3;
-}
-.mainmenu .mainmenu-submenu {
-  display: none;
-  position: absolute;
-  background: #4f8db3;
-  width: 100%;
-  left: 0;
-  z-index: 999;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-box-shadow: 0 5px 5px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 5px 5px rgba(0,0,0,0.4);
-  box-shadow: 0 5px 5px rgba(0,0,0,0.4);
-  color: 0 5px 5px rgba(0,0,0,0.4);
-}
+    .mainmenu > ul > li > a,
+    .mainmenu .mainmenu-submenu-inner > li > a {
+        font-size: 1.2em;
+        padding: 1.2em 1.5em;
+        color: #0C0C0C;   /*nav menulerinin rengi*/
+        display: inline-block;
+        text-decoration: none;
+    }
+        .mainmenu > ul > li > a:hover,
+        .mainmenu .mainmenu-submenu-inner > li > a:hover {
+            color: #A79277; /*mouse üzerine gelince cikan renk*/
+            text-decoration: none;
+        }
+    .mainmenu > ul > li.active > a,
+    .mainmenu .mainmenu-submenu-inner > li.active > a {
+        color: #C40C0C;
+        font-weight: 600 !important;
+    }
+    .mainmenu > ul > li.mainmenu-open a,
+    .mainmenu .mainmenu-submenu-inner > li.mainmenu-open a,
+    .mainmenu > ul li.mainmenu-open > a:hover,
+    .mainmenu .mainmenu-submenu-inner li.mainmenu-open > a:hover {
+        color: #fff;
+        background: #0C0C0C; /*kategoriler+ arkaplan*/
+
+    }
+    .mainmenu .mainmenu-submenu {
+        display: none;
+        position: absolute;
+        /*background: #0C0C0C;*/
+
+        background-image: url('/bookshop/img/kategoriler.jpg');
+        background-size: 130%;
+        background-position: center;
+        width: 100%;
+        left: 0;
+        z-index: 999;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+        -moz-box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+        box-shadow: 0 5px 5px rgba(0,0,0,0.4);
+        color: 0 5px 5px rgba(0,0,0,0.4);
+    }
 .mainmenu .mainmenu-submenu-inner > div {
   width: 33%;
   float: left;
@@ -2457,11 +2462,11 @@ span.color-red {
   padding-bottom: 3em;
 }
 .mainmenu-submenu h4 {
-  color: #bad2e1;
-  padding: 1em 0 0.6em;
-  margin-left: 20px;
-  font-size: 160%;
-  font-weight: 300;
+    color: white;
+    padding: 1em 0 0.6em;
+    margin-left: 20px;
+    font-size: 160%;
+    font-weight: 300;
 }
 .mainmenu-submenu ul {
   margin-left: 20px;
