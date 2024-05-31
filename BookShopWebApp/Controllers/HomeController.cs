@@ -22,23 +22,7 @@ namespace BookShopWebApp.Controllers
 			_bookManager = bookManager;
 			_categoryManager = categoryManager;
 
-			//MapperConfiguration configuration = new MapperConfiguration(configuration =>
-			//{
-
-			//	configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
-			//	configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
-			//	configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Category, y => y.MapFrom(z => z.Category));
-
-			//	configuration.CreateMap<BookViewModel, BookDto>().ReverseMap();
-
-
-
-			//	configuration.CreateMap<CategoryViewModel, CategoryDto>().ForMember(x => x.Books, y => y.MapFrom(z => z.Books));
-
-
-			//	configuration.CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
-
-			//});
+			
 
 			MapperConfiguration configuration = new MapperConfiguration(cfg =>
 			{

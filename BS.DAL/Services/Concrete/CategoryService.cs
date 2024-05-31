@@ -15,8 +15,15 @@ namespace BS.DAL.Services.Concrete
 {
 	public class CategoryService : Service<Category, CategoryDto>
 	{
-		public CategoryService(CategoryRepo repo) : base(repo)
+
+		
+
+		public CategoryService(CategoryRepo repo ) : base(repo)
 		{
+
+
+			
+
 
 			MapperConfiguration config = new MapperConfiguration(config => {
 				Profile profile = new CategoryProfile();
@@ -27,6 +34,16 @@ namespace BS.DAL.Services.Concrete
 
 
 
+
+
+
 		}
+
+
+
+
+		
+
+
 	}
 }

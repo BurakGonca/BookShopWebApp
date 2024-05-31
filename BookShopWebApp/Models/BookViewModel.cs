@@ -37,7 +37,13 @@ namespace BookShopWebApp.Models
 
 			
 
+		//yardimciliar
+
 		public int RowNum { get; set; }
+
+
+		public int CurrentPage { get; set; } // Şu anki sayfa numarası
+		public int TotalPages { get; set; } // Toplam sayfa sayısı
 
 	}
 }

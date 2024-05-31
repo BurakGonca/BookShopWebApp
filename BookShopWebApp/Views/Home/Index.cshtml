@@ -1,11 +1,12 @@
-﻿
-
-@model List<BookViewModel>
-
-@{
+﻿@{
 	ViewData["Title"] = "Ana Sayfa";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
+@model List<BookViewModel>
+
 
 <div class="homepage-slider">
 	<div id="sequence">
@@ -36,8 +37,6 @@
 	</div>
 </div>
 
-
-
 <div class="section section-breadcrumbs">
 	<div class="container">
 		<div class="row">
@@ -48,40 +47,44 @@
 	</div>
 </div>
 
-
 <div class="eshop-section section">
 	<div class="container">
 		<div class="row">
 			@foreach (BookViewModel book in Model)
 			{
 				<div class="col-md-3 col-sm-6">
-					<!-- Product -->
+
 					<div class="shop-item">
-						<!-- Product Image -->
-						<div class="shop-item-image" >
+
+						<div class="shop-item-image">
 							<a href="page-product-details.html">
-								<img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:320px; object-fit: cover;">
+								<img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:300px; object-fit: cover;">
 							</a>
 						</div>
-						<!-- Product Title -->
+
 						<div class="title">
 							<h3><a href="page-product-details.html">@book.BookName</a></h3>
+							<h4 style="text-align:center">@book.AuthorName @book.AuthorSurname</h4>
 						</div>
-						<!-- Product Price-->
+
 						<div class="price">
 							@book.Price TL
 						</div>
-						<!-- Add to Cart Button -->
+
 						<div class="actions">
 							<a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
 						</div>
 					</div>
-					<!-- End Product -->
+
 				</div>
 			}
 		</div>
 	</div>
 </div>
+
+
+
+
 
 
 
