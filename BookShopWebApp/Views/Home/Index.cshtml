@@ -1,9 +1,87 @@
 ﻿
 
+@model List<BookViewModel>
+
 @{
-    ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Ana Sayfa";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="homepage-slider">
+	<div id="sequence">
+		<ul class="sequence-canvas">
+			<li class="bg4">
+				<h1 class="title">Geniş Kitap Yelpazesi</h1>
+				<h2 class="subtitle">Binlerce kitap ile her zevke uygun seçenekler</h2>
+				<img class="slide-img" src="~/bookshop/img/homepage-slider/slide1.png" alt="Slide 1" />
+			</li>
+			<li class="bg3">
+				<h1 class="title">Özel İndirimler</h1>
+				<h2 class="subtitle">Yıl boyu süren kampanyalar ve fırsatlar</h2>
+				<img class="slide-img" src="~/bookshop/img/homepage-slider/slide2.png" alt="Slide 2" />
+			</li>
+			<li class="bg1">
+				<h1 class="title">Hızlı ve Güvenli Teslimat</h1>
+				<h2 class="subtitle">Siparişlerinizi en kısa sürede kapınıza getiriyoruz</h2>
+				<img class="slide-img" src="~/bookshop/img/homepage-slider/slide3.png" alt="Slide 3" />
+			</li>
+		</ul>
+		<div class="sequence-pagination-wrapper">
+			<ul class="sequence-pagination">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="section section-breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>En Çok Satanlar</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="eshop-section section">
+	<div class="container">
+		<div class="row">
+			@foreach (BookViewModel book in Model)
+			{
+				<div class="col-md-3 col-sm-6">
+					<!-- Product -->
+					<div class="shop-item">
+						<!-- Product Image -->
+						<div class="shop-item-image" >
+							<a href="page-product-details.html">
+								<img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:320px; object-fit: cover;">
+							</a>
+						</div>
+						<!-- Product Title -->
+						<div class="title">
+							<h3><a href="page-product-details.html">@book.BookName</a></h3>
+						</div>
+						<!-- Product Price-->
+						<div class="price">
+							@book.Price TL
+						</div>
+						<!-- Add to Cart Button -->
+						<div class="actions">
+							<a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+						</div>
+					</div>
+					<!-- End Product -->
+				</div>
+			}
+		</div>
+	</div>
+</div>
 
 
 

@@ -9,7 +9,7 @@
 
 		//iliskiler
 
-		public IEnumerable<BookViewModel> Books { get; set; }
+		public IEnumerable<BookViewModel>? Books { get; set; }
 
 
 		public int RowNum { get; set; }
