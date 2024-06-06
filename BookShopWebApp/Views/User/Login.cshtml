@@ -1,0 +1,83 @@
+﻿@model LoginViewModel
+
+
+<!DOCTYPE html>
+
+<html class="no-js">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>mPurpose - Multipurpose Feature Rich Bootstrap Template</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="~/bookshop/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/bookshop/css/icomoon-social.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="~/bookshop/css/leaflet.css" />
+	
+	<link rel="stylesheet" href="~/bookshop/css/main.css">
+
+	<script src="~/bookshop/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body>
+	
+
+	<!-- Page Title -->
+	<div class="section section-breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Giriş Yap</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-5">
+					<div class="basic-login">
+						<form role="form" style="margin-top:50px;">
+							<div class="form-group">
+								<label for="login-username"><i class="icon-user"></i> <b>Email</b></label>
+								<input class="form-control" id="login-username" type="text" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="login-password"><i class="icon-lock"></i> <b>Şifre</b></label>
+								<input class="form-control" id="login-password" type="password" placeholder="">
+							</div>
+							<div class="form-group">
+								@* <label class="checkbox">
+									<input type="checkbox"> Remember me
+								</label> *@
+								<p>Henüz bir üyeliğiniz yoksa</p>
+								<a asp-action="Register" class="forgot-password">Buradan kaydolabilirsiniz</a>
+								<button type="submit" class="btn pull-right">Giriş</button>
+								<div class="clearfix"></div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	
+	<!-- Javascripts -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
+	<script src="~/bookshop/js/bootstrap.min.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+	<script src="~/bookshop/js/jquery.fitvids.js"></script>
+	<script src="~/bookshop/js/jquery.sequence-min.js"></script>
+	<script src="~/bookshop/js/jquery.bxslider.js"></script>
+	<script src="~/bookshop/js/main-menu.js"></script>
+	<script src="~/bookshop/js/template.js"></script>
+
+</body>
+</html>

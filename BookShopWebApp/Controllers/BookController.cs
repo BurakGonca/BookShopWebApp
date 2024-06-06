@@ -57,7 +57,7 @@ namespace BookShopWebApp.Controllers
 
 
 
-		public IActionResult Index(int page = 1, int pageSize = 4)
+		public IActionResult Index(int page = 1, int pageSize = 12)
 		{
 			var booksDto = _bookManager.GetAll().ToList();
 			var booksViewModel = _mapper.Map<List<BookViewModel>>(booksDto);

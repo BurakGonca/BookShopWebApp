@@ -1,15 +1,13 @@
+
 using BS.BLL.Managers.Concrete;
 using BS.DAL.Context;
 using BS.DAL.Repositories.Concrete;
 using BS.DAL.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
-
-using System;
 using BS.Entities.Concrete;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using System.Reflection;
 using FluentValidation;
+using System.Reflection;
 
 namespace BookShopWebApp
 {
@@ -19,31 +17,47 @@ namespace BookShopWebApp
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-
-			//authentication ekleme
-			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-							.AddCookie(opt =>
-							{
-								opt.LoginPath = "/Admin/Account/Login";    //accoount/login
-								opt.LogoutPath = "/Admin/Account/Logout";  //accoount/logout
-							});
+			// DbContext ekleme
+			builder.Services.AddDbContext<BSDbContext>(options =>
+				options.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
 
 
+			//identity ekleme
 
-			builder.Services.AddDbContext<BSDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
+			//            builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
+			//				.AddEntityFrameworkStores<BSDbContext>();
+
+			//			//builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+			//			//             .AddDefaultTokenProviders()
+			//			//             .AddEntityFrameworkStores<BSDbContext>();         //NOT: geniþletilmemiþ halinde bunu kullanýyoruz
 
 
 
 
 
-			// Add services to the container.
+			// Identity ekleme 
+			builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
+				.AddEntityFrameworkStores<BSDbContext>()
+				.AddDefaultTokenProviders();
+
+
+
+
+			
+			builder.Services.ConfigureApplicationCookie(options =>
+			{
+				options.LoginPath = "/Admin/Account/Login";    // account/login
+				options.LogoutPath = "/Admin/Account/Logout";  // account/logout
+			});
+
+
+
+
+
+			// Add services to the container
 			builder.Services.AddControllersWithViews();
 
-
-
-
-			//dependency injection baglantilari tanimlama
-
+			// Dependency injection baðlantýlarý tanýmlama
 			builder.Services.AddScoped<BookRepo>();
 			builder.Services.AddScoped<BookService>();
 			builder.Services.AddScoped<BookManager>();
@@ -52,33 +66,15 @@ namespace BookShopWebApp
 			builder.Services.AddScoped<CategoryService>();
 			builder.Services.AddScoped<CategoryManager>();
 
-			
-
-
-			//validation ekleme
+			// Validation ekleme
 			builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+			var app = builder.Build();
 
-
-            //identity ekleme
-
-            builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
-				.AddEntityFrameworkStores<BSDbContext>();
-
-            //builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
-            //             .AddDefaultTokenProviders()
-            //             .AddEntityFrameworkStores<BSDbContext>();         //NOT: geniþletilmemiþ halinde bunu kullanýyoruz
-
-
-
-
-            var app = builder.Build();
-
-			// Configure the HTTP request pipeline.
+			// Configure the HTTP request pipeline
 			if (!app.Environment.IsDevelopment())
 			{
 				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 
@@ -87,48 +83,25 @@ namespace BookShopWebApp
 
 			app.UseRouting();
 
-
-
-
-			//authenticationi kullandirmak için ekledik.
+			
 			app.UseAuthentication();
-
-
 			app.UseAuthorization();
 
 
 
-            //rotalar
+			// Rotalar
+			app.MapControllerRoute(
+				name: "areas",
+				pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}"
+			);
 
-            
-
-            app.MapControllerRoute(
-              name: "areas",
-              pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}"
-          );
-
-
-            app.MapControllerRoute(
+			app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}"
 			);
 
-
-
-
-
 			app.Run();
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
 }
+

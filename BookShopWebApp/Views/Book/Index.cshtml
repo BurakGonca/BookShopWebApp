@@ -1,51 +1,59 @@
-﻿@using BookShopWebApp.Models.HelperModels
+﻿
 
-
-
-
+@using BookShopWebApp.Models.HelperModels
 
 @{
-	ViewData["Title"] = "Tüm Kitaplar";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Tüm Kitaplar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model BookListViewModel
 
+<div class="section section-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Tüm Kitaplar</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
-	<div class="row">
-		@foreach (var book in Model.Books)
-		{
-			<div class="col-md-3 col-sm-6">
-				<div class="shop-item">
-					<div class="shop-item-image">
-						<a href="#">
-							<img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:300px; object-fit: cover;">
-						</a>
-					</div>
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-md-2 col-sm-4">
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <a href="#">
+                            <img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:200px; object-fit: cover;">
+                        </a>
+                    </div>
 
-					<div class="title">
-						<h3><a href="page-product-details.html">@book.BookName</a></h3>
-						<h4 style="text-align:center">@book.AuthorName @book.AuthorSurname</h4>
-					</div>
+                    <div class="title">
+                        <h3><a href="page-product-details.html">@book.BookName</a></h3>
+                        <h4>@book.AuthorName @book.AuthorSurname</h4>
+                    </div>
 
-					<div class="price">
-						@book.Price TL
-					</div>
+                    <div class="price">
+                        @book.Price TL
+                    </div>
 
-					<div class="actions">
-						<a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
-					</div>
-				</div>
-			</div>
-		}
-	</div>
+                    <div class="actions">
+                        <a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 <div class="pagination-wrapper">
-	<ul class="pagination pagination-lg">
-		@for (var i = 1; i <= Model.TotalPages; i++)
-		{
-			<li class="@(i == Model.CurrentPage ? "active" : "")"><a href="?page=@i">@i</a></li>
-		}
-	</ul>
+    <ul class="pagination pagination-lg">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="@(i == Model.CurrentPage ? "active" : "")"><a href="?page=@i">@i</a></li>
+        }
+    </ul>
 </div>

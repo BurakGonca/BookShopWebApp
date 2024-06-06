@@ -1,4 +1,4 @@
-﻿@* @model CategoryViewModel *@
+﻿
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -25,7 +25,7 @@
 					<ul>
 						<li class="shopping-cart-items" style="margin-top:47px; font-size:17px;"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="~/bookshop/page-shopping-cart.html"><b>Sepet</b></a></li>
 
-						<li style="margin-top:47px; font-size:16px;"><a href="~/bookshop/page-login.html"><b>Giriş</b></a></li>
+						<li style="margin-top:47px; font-size:16px;"><a asp-controller="User" asp-action="Login"><b>Giriş</b></a></li>
 					</ul>
 				</div>
 			</div>
@@ -40,22 +40,8 @@
 
 					<li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
 
-					@* <li class="has-submenu">
-						<a href="#">Kategoriler +</a>
-						<div class="mainmenu-submenu">
-							<div class="mainmenu-submenu-inner">
-								<div>
-
-									<div>
-										<h4>Tüm Kategoriler</h4>
-										<ul>
-											@await Component.InvokeAsync("CategoryList")
-										</ul>
-									</div>
-								</div>
-					</div><!-- /mainmenu-subme nu --> *@
-					</li>
-
+					
+					
 
 					<li><a asp-controller="Category" asp-action="Index">Kategoriler</a></li>
 					<li><a asp-controller="Book" asp-action="Index">Kitaplar</a></li>

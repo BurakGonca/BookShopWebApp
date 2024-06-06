@@ -7,6 +7,8 @@
       
         <div class="col-md-8">
             <form asp-action="Create" asp-controller="Book" enctype="multipart/form-data">
+
+
                 <div class="form-group">
                     <input asp-for="BookName" class="form-control" placeholder="Kitap Adı" />
                     <span asp-validation-for="BookName" class="form-text text-danger"></span>

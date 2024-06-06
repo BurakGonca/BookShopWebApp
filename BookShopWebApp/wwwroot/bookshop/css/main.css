@@ -817,152 +817,78 @@ a {
 /*--------------------------------------------------------------------------
 +	E-commerce Style
 --------------------------------------------------------------------------*/
+
+
+/*düzenlenmiþ hali*/
+
 .shop-item {
-    position: relative;
-    background: #FFF;
-    padding-bottom: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border: 8px solid #FFF;
-    -webkit-border-radius: 5px;
-    -webkit-background-clip: padding-box;
-    -moz-border-radius: 5px;
-    -moz-background-clip: padding;
+    padding-bottom: 5px; 
+    margin-top: 10px; 
+    margin-bottom: 5px; 
+    border: 4px solid #FFF; 
     border-radius: 5px;
     background-clip: padding-box;
-    -webkit-box-shadow: inset 0 1px #fff,0 0 8px #c8cfe6;
-    -moz-box-shadow: inset 0 1px #fff,0 0 8px #c8cfe6;
-    box-shadow: inset 0 1px #fff,0 0 8px #c8cfe6;
-    color: inset 0 1px #fff,0 0 8px #c8cfe6;
+    box-shadow: inset 0 1px #fff,0 0 4px #c8cfe6;
+    color: inset 0 1px #fff,0 0 4px #c8cfe6; 
 }
 
     .shop-item img {
         max-width: 100%;
-    }
-
-    .shop-item .image {
-        text-align: center;
+        height: auto; 
     }
 
     .shop-item .title {
-        padding: 20px 0 10px;
+        padding: 10px 0 5px; 
     }
 
         .shop-item .title h3 {
-            font-size: 0.9em;
-            margin: 0 10px;
+            font-size:12px; 
+            margin: 0 5px; 
+            text-align: center; 
+        }
+
+        .shop-item .title h4 {
+            font-size: 12px;
+            margin: 0;
             text-align: center;
         }
 
-            .shop-item .title h3 a {
-                color: #535b60;
-                text-transform: uppercase;
-            }
-
-    .shop-item .colors {
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-        .shop-item .colors span {
-            display: inline-block;
-            *display: inline;
-            width: 8px;
-            height: 8px;
-            border-width: 1px;
-            border-style: solid;
-            margin: 2px;
-        }
-
     .shop-item .price {
-        color: #535b60;
-        font-size: 1.5em;
+        font-size: 1.2em; 
+        margin-bottom: 5px; 
         text-align: center;
-        margin-bottom: 20px;
-        font-weight: 600;
-        -webkit-border-radius: 7px;
-        -webkit-background-clip: padding-box;
-        -moz-border-radius: 7px;
-        -moz-background-clip: padding;
-        border-radius: 7px;
-        background-clip: padding-box;
     }
-
-        .shop-item .price .price-was {
-            color: #A7A7A7;
-            font-size: 0.8em;
-            text-decoration: line-through;
-        }
 
     .shop-item .description {
-        color: #828282;
-        font-size: 0.9em;
-        text-align: justify;
-        margin: 0 10px;
+        font-size: 0.75em; 
+        margin: 0 5px;
     }
 
         .shop-item .description p {
-            border-top: 1px solid #ECECEC;
-            padding: 10px;
-            margin: 0;
+            padding: 5px; 
         }
+
 
     .shop-item .actions {
         border-top: 1px solid #ECECEC;
-        margin: 0 10px;
-        padding-top: 20px;
-        text-align: center;
+        margin: 0 5px; /* Decreased */
+        padding-top: 5px; /* Decreased */
+        text-align: center; /* Center the button */
     }
+
+
+    /*.shop-item .actions {
+        margin: 0 5px; 
+        padding-top: 10px; 
+    }*/
 
         .shop-item .actions span {
-            font-size: 0.8em;
-            white-space: nowrap;
+            font-size: 0.7em; 
         }
 
-.colors {
-    text-align: center;
-    margin-bottom: 10px;
-}
 
-    .colors span {
-        display: inline-block;
-        *display: inline;
-        width: 8px;
-        height: 8px;
-        border-width: 1px;
-        border-style: solid;
-        margin: 2px;
-    }
 
-span.color-white {
-    background-color: #D7D7CF;
-    border-color: #c0c0b3;
-}
 
-span.color-black {
-    background-color: #000;
-    border-color: #000000;
-}
-
-span.color-blue {
-    background-color: #073A52;
-    border-color: #031923;
-}
-
-span.color-orange {
-    background-color: #D56E1D;
-    border-color: #a85717;
-}
-
-span.color-green {
-    background-color: #5C6632;
-    border-color: #3d4421;
-}
-
-span.color-red {
-    background-color: #DA1111;
-    border-color: #ab0d0d;
-}
 /*--------------------------------------------------------------------------
 +	Product Details Page Style
 --------------------------------------------------------------------------*/
@@ -2985,7 +2911,7 @@ span.color-red {
 /*--------------------------------------------------------------------------
 +	Buttons Style
 --------------------------------------------------------------------------*/
-.btn {
+/*.btn {
     border: 1px solid #4f8db3;
     -webkit-border-radius: 2px;
     -webkit-background-clip: padding-box;
@@ -3008,7 +2934,34 @@ span.color-red {
     box-shadow: none;
     color: #FFF;
     white-space: nowrap;
+}*/
+
+.btn {
+    border: 1px solid #4f8db3;
+    -webkit-border-radius: 2px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 2px;
+    -moz-background-clip: padding;
+    border-radius: 2px;
+    background-clip: padding-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block; /* Ensure the button is an inline-block element */
+    text-transform: none;
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    transition: all .25s ease;
+    text-align: center;
+    background: none repeat scroll 0 0 #4f8db3;
+    text-shadow: none;
+    box-shadow: none;
+    color: #FFF;
+    white-space: nowrap;
 }
+
+
 
     .btn:hover {
         background: none repeat scroll 0 0 #3b3c41;

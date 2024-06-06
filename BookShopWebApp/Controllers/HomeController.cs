@@ -48,7 +48,7 @@ namespace BookShopWebApp.Controllers
 
 		public IActionResult Index()
 		{
-			List<BookDto> bookDtos = _bookManager.GetAll().Take(4).ToList();
+			List<BookDto> bookDtos = _bookManager.GetAll().Take(6).ToList();
 
 			List<BookViewModel> models = new List<BookViewModel>();
 

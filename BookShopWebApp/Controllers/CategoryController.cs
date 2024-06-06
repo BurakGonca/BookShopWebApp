@@ -64,7 +64,7 @@ namespace BookShopWebApp.Controllers
 
 
 
-		public IActionResult Books(int id, int page = 1, int pageSize = 4)
+		public IActionResult Books(int id, int page = 1, int pageSize = 12)
 		{
 			var categoryDto = _categoryManager.GetById(id);
 
