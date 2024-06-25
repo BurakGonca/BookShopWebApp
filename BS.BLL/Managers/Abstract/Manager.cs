@@ -1,9 +1,11 @@
-﻿using BS.DAL.Services.Abstract;
+﻿using AutoMapper;
+using BS.DAL.Services.Abstract;
 using BS.DTO.Abstract;
 using BS.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,10 +32,12 @@ namespace BS.BLL.Managers.Abstract
 
 		public TDto? GetById(int id) { return _service.GetById(id); }
 
+		
 
 		public int Update(TDto dto) { return _service.Update(dto); }
 
 
+		public IEnumerable<TDto> Search(Expression<Func<TDto, bool>> predicate) { return _service.Search(predicate); }
 		
 
 	}

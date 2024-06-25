@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BS.Entities.Concrete;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookShopWebApp.Models
 {
@@ -16,6 +17,7 @@ namespace BookShopWebApp.Models
 
 		[Display(Name = "Yayın Yılı")]
 		public DateTime? PublishDate { get; set; } = DateTime.Now;
+
 		[Display(Name = "Fiyatı")]
 		public double Price { get; set; }
 		[Display(Name = "Stok Adeti")]
@@ -30,6 +32,8 @@ namespace BookShopWebApp.Models
 
 		public IEnumerable<CommentViewModel>? Comments { get; set; }
 		public IEnumerable<OrderDetailViewModel>? OrderDetails { get; set; }
+
+		public IEnumerable<ShoppingCartBookViewModel> ShoppingCartBooks { get; set; }
 
 		[Display(Name = "Kategorisi")]
 		public int CategoryId { get; set; }

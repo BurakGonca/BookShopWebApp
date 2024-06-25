@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using AutoMapper.Extensions.ExpressionMapping;
 using BS.DAL.Repositories.Abtract;
 using BS.DAL.Repositories.Concrete;
 using BS.DTO.Abstract;
 using BS.Entities.Abstract;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +25,7 @@ namespace BS.DAL.Services.Abstract
 		public Service(Repo<TEntity> repo)
 		{
 			MapperConfiguration configuration = new MapperConfiguration(cfg => {
-				cfg.CreateMap<TDto, TEntity>().ReverseMap();
+				cfg.AddExpressionMapping().CreateMap<TDto, TEntity>().ReverseMap();
 			});
 
 
@@ -59,6 +62,7 @@ namespace BS.DAL.Services.Abstract
 			return dtos;
 		}
 
+
 		public TDto? GetById(int id)
 		{
 			TEntity? entity = _repo.GetById(id);
@@ -72,6 +76,23 @@ namespace BS.DAL.Services.Abstract
 			TEntity entity = _mapper.Map<TEntity>(dto);
 			return _repo.Update(entity);
 		}
+
+
+		public List<TDto> Search(Expression<Func<TDto, bool>> predicate)
+		{
+			Expression<Func<TEntity, bool>> predicateEntities = _mapper.Map<Expression<Func<TEntity, bool>>>(predicate);
+
+            List<TEntity> entities = _repo.Search(predicateEntities).ToList();
+
+			var c = _repo.Search(predicateEntities).ToList(); 
+
+            List<TDto> dtos = _mapper.Map<List<TDto>>(entities);
+
+			return dtos;
+
+		}
+
+
 
 
 	}

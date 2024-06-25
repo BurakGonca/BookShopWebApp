@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using AutoMapper.Extensions.ExpressionMapping;
 using BS.DAL.Profiles;
-using BS.DAL.Repositories.Abtract;
 using BS.DAL.Repositories.Concrete;
 using BS.DAL.Services.Abstract;
 using BS.DTO.Concrete;
@@ -14,20 +12,18 @@ using System.Threading.Tasks;
 
 namespace BS.DAL.Services.Concrete
 {
-	public class ShoppingCartService : Service<ShoppingCart, ShoppingCartDto>
+	public class ShoppingCartBookService :Service<ShoppingCartBook, ShoppingCartBookDto>
 	{
-		public ShoppingCartService(ShoppingCartRepo repo) : base(repo)
+		public ShoppingCartBookService(ShoppingCartBookRepo repo) : base(repo)
 		{
 			MapperConfiguration config = new MapperConfiguration(config => {
-				Profile profile = new ShoppingCartProfile();
+				Profile profile = new ShoppingCartBookProfile();
 				config.AddProfile(profile);
-
-				//config.AddExpressionMapping().CreateMap<ShoppingCartDto, ShoppingCart>().ReverseMap();
-
 			});
 
 			base.Mapper = config.CreateMapper();
 
 		}
+
 	}
 }

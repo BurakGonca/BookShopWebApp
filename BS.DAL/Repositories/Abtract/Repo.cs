@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,8 @@ namespace BS.DAL.Repositories.Abtract
 			return entities.SingleOrDefault(e => e.Id == id);
 		}
 
+		
+
 		public int Update(TEntity entity)
 		{
 			
@@ -63,6 +66,18 @@ namespace BS.DAL.Repositories.Abtract
 
 			return _dbContext.SaveChanges();
 
+
+		}
+
+
+		//filtre ederek getirecek
+		public IQueryable<TEntity> Search(Expression<Func<TEntity, bool>> predicate)
+		{
+			var allEntities = GetAll();
+
+			
+
+            return allEntities.Where(predicate);
 
 		}
 

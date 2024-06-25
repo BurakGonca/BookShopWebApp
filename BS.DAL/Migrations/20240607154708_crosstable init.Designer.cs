@@ -4,6 +4,7 @@ using BS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BS.DAL.Migrations
 {
     [DbContext(typeof(BSDbContext))]
-    partial class BSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240607154708_crosstable init")]
+    partial class crosstableinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +114,7 @@ namespace BS.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "df57d899-36cf-4ece-b248-58b64d8e56d0",
+                            ConcurrencyStamp = "809e9224-390f-4bf8-b73e-4825db042d05",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             Gender = (byte)3,
@@ -119,7 +122,7 @@ namespace BS.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEihlHeyaHQ+CuWBLbzD7TUv6Rbm03G9JFllH3QkrS8cNec0yfaGLeXTw3Mgi8GPBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIm3mwzrSeOaktPYikyKAtyGIOuMqwEvqsyREVd/OXQt9YzEy6Jsb/g+Vn6xkX/KQw==",
                             PhoneNumberConfirmed = false,
                             Surname = "Admin",
                             TwoFactorEnabled = false,
@@ -372,10 +375,10 @@ namespace BS.DAL.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<double?>("TotalPrice")
+                    b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
                     b.Property<DateTime?>("UpdatedDate")

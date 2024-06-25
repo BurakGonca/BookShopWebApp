@@ -21,14 +21,14 @@ namespace BookShopWebApp.Areas.Admin.Controllers
         private IValidator<LoginViewModel> _validator;
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
-        private IMailService _mailService;
+        
 
         public AccountController(IValidator<LoginViewModel> validator, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _validator = validator;
             _userManager = userManager;
             _signInManager = signInManager;
-            //_mailService = mailService;
+            
         }
 
         public IActionResult Login()

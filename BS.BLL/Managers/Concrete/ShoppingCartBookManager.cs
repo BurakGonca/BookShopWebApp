@@ -1,6 +1,4 @@
 ﻿using BS.BLL.Managers.Abstract;
-using BS.DAL.Repositories.Concrete;
-using BS.DAL.Services.Abstract;
 using BS.DAL.Services.Concrete;
 using BS.DTO.Concrete;
 using BS.Entities.Concrete;
@@ -12,20 +10,12 @@ using System.Threading.Tasks;
 
 namespace BS.BLL.Managers.Concrete
 {
-	public class ShoppingCartManager : Manager<ShoppingCartDto, ShoppingCart>
+	public class ShoppingCartBookManager : Manager<ShoppingCartBookDto, ShoppingCartBook>
 	{
 
-		
-
-		public ShoppingCartManager(ShoppingCartService service) : base(service)
+		public ShoppingCartBookManager(ShoppingCartBookService service) : base(service)
 		{
-			
+
 		}
-
-
-
-		
-
-
 	}
 }

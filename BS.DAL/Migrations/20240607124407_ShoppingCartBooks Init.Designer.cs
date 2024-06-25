@@ -4,6 +4,7 @@ using BS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BS.DAL.Migrations
 {
     [DbContext(typeof(BSDbContext))]
-    partial class BSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240607124407_ShoppingCartBooks Init")]
+    partial class ShoppingCartBooksInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +114,7 @@ namespace BS.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "df57d899-36cf-4ece-b248-58b64d8e56d0",
+                            ConcurrencyStamp = "6c1c4abe-a96a-47ed-b7cb-74ee8de590ec",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             Gender = (byte)3,
@@ -119,7 +122,7 @@ namespace BS.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEihlHeyaHQ+CuWBLbzD7TUv6Rbm03G9JFllH3QkrS8cNec0yfaGLeXTw3Mgi8GPBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIDG1NeT9dm6cS4zSRfwo/SM+O9Jae1ks86iFPD+3U87O05gYfCm68MxOwlSgLV/1w==",
                             PhoneNumberConfirmed = false,
                             Surname = "Admin",
                             TwoFactorEnabled = false,
@@ -163,6 +166,9 @@ namespace BS.DAL.Migrations
                     b.Property<DateTime?>("PublishDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ShoppingCartId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
@@ -172,6 +178,8 @@ namespace BS.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("Books");
                 });
@@ -372,10 +380,10 @@ namespace BS.DAL.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<double?>("TotalPrice")
+                    b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -383,39 +391,9 @@ namespace BS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("ShoppingCarts");
-                });
-
-            modelBuilder.Entity("BS.Entities.Concrete.ShoppingCartBook", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("ShoppingCartBook");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -574,6 +552,10 @@ namespace BS.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BS.Entities.Concrete.ShoppingCart", null)
+                        .WithMany("Books")
+                        .HasForeignKey("ShoppingCartId");
+
                     b.Navigation("Category");
                 });
 
@@ -664,31 +646,12 @@ namespace BS.DAL.Migrations
             modelBuilder.Entity("BS.Entities.Concrete.ShoppingCart", b =>
                 {
                     b.HasOne("BS.Entities.Concrete.AppUser", "AppUser")
-                        .WithOne("ShoppingCart")
-                        .HasForeignKey("BS.Entities.Concrete.ShoppingCart", "AppUserId")
+                        .WithMany("ShoppingCarts")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("BS.Entities.Concrete.ShoppingCartBook", b =>
-                {
-                    b.HasOne("BS.Entities.Concrete.Book", "Book")
-                        .WithMany("ShoppingCartBooks")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BS.Entities.Concrete.ShoppingCart", "ShoppingCart")
-                        .WithMany("ShoppingCartBooks")
-                        .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("ShoppingCart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -750,7 +713,7 @@ namespace BS.DAL.Migrations
 
                     b.Navigation("Orders");
 
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("ShoppingCarts");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Book", b =>
@@ -758,8 +721,6 @@ namespace BS.DAL.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("OrderDetails");
-
-                    b.Navigation("ShoppingCartBooks");
                 });
 
             modelBuilder.Entity("BS.Entities.Concrete.Category", b =>
@@ -780,9 +741,9 @@ namespace BS.DAL.Migrations
 
             modelBuilder.Entity("BS.Entities.Concrete.ShoppingCart", b =>
                 {
-                    b.Navigation("Order");
+                    b.Navigation("Books");
 
-                    b.Navigation("ShoppingCartBooks");
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

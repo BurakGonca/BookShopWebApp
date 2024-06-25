@@ -1,6 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "Ana Sayfa";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	bool isUserLoggedIn = User.Identity.IsAuthenticated;
 }
 
 
@@ -71,7 +72,14 @@
 						</div>
 
 						<div class="actions">
-							<a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+							@if (isUserLoggedIn)
+							{
+								<a asp-route-id="@book.Id" asp-controller="Book" asp-action="AddToCart" type="submit" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+							}
+							else
+							{
+								<button onclick="showLoginAlert()" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</button>
+							}
 						</div>
 					</div>
 				</div>
@@ -83,7 +91,11 @@
 	</div>
 </div>
 
-
+<script>
+	function showLoginAlert() {
+		alert("Sipariş vermek için önce giriş yapmalısınız.");
+	}
+</script>
 
 
 

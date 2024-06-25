@@ -1,104 +1,110 @@
 ﻿
-
 <!DOCTYPE html>
 <html class="no-js">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>@ViewBag.Title - BurakKitap</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@ViewBag.Title - BurakKitap</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="~/bookshop/css/bootstrap.min.css">
-	<link rel="stylesheet" href="~/bookshop/css/icomoon-social.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="~/bookshop/css/leaflet.css" />
-	<link rel="stylesheet" href="~/bookshop/css/main.css">
+    <link rel="stylesheet" href="~/bookshop/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/bookshop/css/icomoon-social.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/bookshop/css/leaflet.css" />
+    <link rel="stylesheet" href="~/bookshop/css/main.css">
 
-	<script src="~/bookshop/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    @* boostrapten ikon eklemek için linki yazdım *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+
+
+    <script src="~/bookshop/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
-	<div class="mainmenu-wrapper">
-		<div class="container">
-			<div class="menuextras">
-				<div class="extras">
-					<ul>
-						<li class="shopping-cart-items" style="margin-top:47px; font-size:17px;"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="~/bookshop/page-shopping-cart.html"><b>Sepet</b></a></li>
+    <div class="mainmenu-wrapper">
+        <div class="container">
+            <div class="menuextras">
+                <div class="extras">
+                    <ul>
+                        <li class="shopping-cart-items" style="margin-top:47px; font-size:17px;">
+                            <a href="~/bookshop/page-shopping-cart.html">
+                                <i class="glyphicon glyphicon-shopping-cart icon-white"></i>
+                            </a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li style="margin-top:47px; font-size:16px;">
+                                <span><b>Hoşgeldin @User.Identity.Name</b></span>
+                                <a asp-controller="User" asp-action="Logout">
+                                  
+                                    <i class="bi bi-x-circle-fill"></i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="margin-top:47px; font-size:16px;">
+                                <a asp-controller="User" asp-action="Login">
+                                    <i class="glyphicon glyphicon-user icon-white"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <nav id="mainmenu" class="mainmenu">
+                <ul>
+                    <li class="logo-wrapper">
+                        <a asp-controller="Home" asp-action="Index">
+                            <img src="~/bookshop/img/logo.jpg" style="height:50px;" />
+                        </a>
+                    </li>
+                    <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                    <li><a asp-controller="Category" asp-action="Index">Kategoriler</a></li>
+                    <li><a asp-controller="Book" asp-action="Index">Kitaplar</a></li>
+                    <li><a asp-controller="Home" asp-action="About">Hakkımızda</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-						<li style="margin-top:47px; font-size:16px;"><a asp-controller="User" asp-action="Login"><b>Giriş</b></a></li>
-					</ul>
-				</div>
-			</div>
-			<nav id="mainmenu" class="mainmenu">
-				<ul>
+    @RenderBody()
 
-					<li class="logo-wrapper">
-						<a asp-controller="Home" asp-action="Index">
-							<img src="~/bookshop/img/logo.jpg" style="height:50px;" />
-						</a>
-					</li>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>İletişim</h3>
+                    <p>
+                        <b>Adres:</b> Atatürk Caddesi 06000 Çankaya, Ankara, Türkiye<br>
+                        <b>Telefon:</b> 0850 000 00 00 - 0312 000 00 00<br>
+                        <b>E-posta:</b> <a href="mailto:goncaburakk@gmail.com">goncaburakk@gmail.com</a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Şirketimiz Hakkında</h3>
+                    <p>BurakKitap, okuma tutkunlarına geniş bir yelpazede kitaplar sunan, güvenilir ve hızlı hizmet sağlayan bir e-ticaret platformudur. Amacımız, her yaştan ve ilgi alanından okura hitap eden zengin bir koleksiyon ile okuma alışkanlığını yaygınlaştırmaktır.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center" style="margin-top: 10px;">© 2024 BurakKitap. Tüm Hakları Saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-					<li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+    <script src="~/bookshop/js/jquery-1.9.1.min.js"></script>
+    <script src="~/bookshop/js/bootstrap.min.js"></script>
+    <script src="~/bookshop/js/leaflet.js"></script>
+    <script src="~/bookshop/js/jquery.sequence-min.js"></script>
+    <script src="~/bookshop/js/jquery.bxslider.js"></script>
+    <script src="~/bookshop/js/main-menu.js"></script>
+    <script src="~/bookshop/js/template.js"></script>
 
-					
-					
-
-					<li><a asp-controller="Category" asp-action="Index">Kategoriler</a></li>
-					<li><a asp-controller="Book" asp-action="Index">Kitaplar</a></li>
-					<li><a asp-controller="Home" asp-action="About">Hakkımızda</a></li>
-					<li><a asp-controller="Home" asp-action="Contact">İletişim</a></li>
-
-
-
-
-
-				</ul>
-			</nav>
-		</div>
-	</div>
-
-	
-
-	@RenderBody()
-
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<h3>İletişim</h3>
-					<p>
-						<b>Adres:</b> Atatürk Caddesi 06000 Çankaya, Ankara, Türkiye<br>
-						<b>Telefon:</b> 0850 000 00 00 - 0312 000 00 00<br>
-						<b>E-posta:</b> <a href="mailto:goncaburakk@gmail.com">goncaburakk@gmail.com</a>
-					</p>
-				</div>
-				<div class="col-md-6">
-					<h3>Şirketimiz Hakkında</h3>
-					<p>BurakKitap, okuma tutkunlarına geniş bir yelpazede kitaplar sunan, güvenilir ve hızlı hizmet sağlayan bir e-ticaret platformudur.Amacımız, her yaştan ve ilgi alanından okura hitap eden zengin bir koleksiyon ile okuma alışkanlığını yaygınlaştırmaktır.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<p class="text-center" style="margin-top: 10px;">© 2024 BurakKitap. Tüm Hakları Saklıdır.</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-
-
-
-
-
-	<script src="~/bookshop/js/jquery-1.9.1.min.js"></script>
-	<script src="~/bookshop/js/bootstrap.min.js"></script>
-	<script src="~/bookshop/js/leaflet.js"></script>
-	<script src="~/bookshop/js/jquery.sequence-min.js"></script>
-	<script src="~/bookshop/js/jquery.bxslider.js"></script>
-	<script src="~/bookshop/js/main-menu.js"></script>
-	<script src="~/bookshop/js/template.js"></script>
-
-	@RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>
+

@@ -11,19 +11,19 @@ namespace BS.DTO.Concrete
 	public class ShoppingCartDto : BaseDto
 	{
 
-		public double TotalPrice { get; set; }
-		public bool IsActive { get; set; }
+		public double? TotalPrice { get; set; }
+		public bool? IsActive { get; set; }
 
 
 
 
 		//iliskiler
 
-		public OrderDto Order { get; set; }
+		public OrderDto? Order { get; set; }
 
-				
+		public IEnumerable<ShoppingCartBookDto>? ShoppingCartBooks { get; set; }
 		public int AppUserId { get; set; }
-		public AppUserDto AppUser { get; set; }
+		public AppUserDto? AppUser { get; set; }
 
 	}
 }

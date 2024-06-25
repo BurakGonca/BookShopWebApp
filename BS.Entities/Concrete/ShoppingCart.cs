@@ -12,22 +12,21 @@ namespace BS.Entities.Concrete
         
 
 
-        public double TotalPrice { get; set; }
-        public bool IsActive { get; set; }
+        public double? TotalPrice { get; set; }
+        public bool? IsActive { get; set; }
 
 
 
 
         //iliskiler
 
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
 
 
-        //public IQueryable<Book> Books { get; set; }
+		public IEnumerable<ShoppingCartBook>? ShoppingCartBooks { get; set; }
 
-
-        public int AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+		public int AppUserId { get; set; }
+        public AppUser? AppUser { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace BS.DAL.Profiles
         {
             CreateMap<AppUser, AppUserDto>()
                            .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
-                           .ForMember(dest => dest.ShoppingCarts, opt => opt.MapFrom(src => src.ShoppingCarts))
+                           .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
                            .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => src.Orders))
                            .ReverseMap();
 

@@ -1,9 +1,14 @@
-﻿namespace BS.Enums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BS.Enums
 {
 	public enum Gender : byte
 	{
-		Unknown = 1,
-		Male,
-		Female
+		
+		Erkek = 1,
+		
+		Kadın,
+	
+		Belirtilmedi
 	}
 }

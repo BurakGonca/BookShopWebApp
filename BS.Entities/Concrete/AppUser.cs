@@ -21,7 +21,7 @@ namespace BS.Entities.Concrete
 
         public IEnumerable<Comment>? Comments { get; set; }
         public IEnumerable<Order>? Orders { get; set; }
-        public IEnumerable<ShoppingCart>? ShoppingCarts { get; set; }
+        public ShoppingCart? ShoppingCart { get; set; } //1-1 yaptık
         public IEnumerable<OrderDetail>? OrderDetails { get; set; }
 
 

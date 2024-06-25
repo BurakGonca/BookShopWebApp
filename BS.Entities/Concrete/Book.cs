@@ -28,7 +28,8 @@ namespace BS.Entities.Concrete
 
         public IEnumerable<Comment>? Comments { get; set; }
         public IEnumerable<OrderDetail>? OrderDetails { get; set; }
-
+        
+        public IEnumerable<ShoppingCartBook> ShoppingCartBooks { get; set; }
 
         public int CategoryId { get; set; }
         public Category? Category { get; set; }

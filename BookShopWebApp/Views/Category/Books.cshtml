@@ -1,6 +1,7 @@
 ﻿@{
 	ViewData["Title"] = $"{Model.CategoryName}";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	bool isUserLoggedIn = User.Identity.IsAuthenticated;
 }
 
 @model CategoryViewModel
@@ -20,9 +21,9 @@
 	<div class="row">
 		@if (!Model.Books.Any())
 		{
-			<div class="col-md-12 text-center" style="position:page; width: 600px; height: 100%;">
+			<div class="col-md-12 text-center" style="position:page; width: 575px; height: 100%;">
 				<img src="~/bookshop/img/empty-category.jpg" alt="Empty Category" style="width: 800px; height: 100%; margin-top: 20px;">
-				<h3 style="position: absolute; text-align:center; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #000; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);">
+				<h3 style="position: absolute; text-align:center; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #000; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8); ">
 					Bu kategoride henüz kitap yok.
 				</h3>
 			</div>
@@ -52,8 +53,16 @@
 						</div>
 
 						<div class="actions">
-							<a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+							@if (isUserLoggedIn)
+							{
+								<a asp-route-id="@book.Id" asp-controller="Book" asp-action="AddToCart" type="submit" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+							}
+							else
+							{
+								<button onclick="showLoginAlert()" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</button>
+							}
 						</div>
+
 					</div>
 				</div>
 			}
@@ -74,6 +83,16 @@
 	</div>
 	<!-- Pagination Sonu -->
 }
+
+
+
+
+<script>
+	function showLoginAlert() {
+		alert("Sipariş vermek için önce giriş yapmalısınız.");
+	}
+</script>
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

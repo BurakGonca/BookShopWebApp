@@ -1,13 +1,12 @@
 ﻿
 
-@using BookShopWebApp.Models.HelperModels
+ @using BookShopWebApp.Models.HelperModels
 
 @{
     ViewData["Title"] = "Tüm Kitaplar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isUserLoggedIn = User.Identity.IsAuthenticated;
 }
-
-@model BookListViewModel
 
 <div class="section section-breadcrumbs">
     <div class="container">
@@ -41,7 +40,14 @@
                     </div>
 
                     <div class="actions">
-                        <a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+                        @if (isUserLoggedIn)
+                        {
+                            <a asp-route-id="@book.Id" asp-action="AddToCart" type="submit" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+                        }
+                        else
+                        {
+                            <button onclick="showLoginAlert()" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -57,3 +63,9 @@
         }
     </ul>
 </div>
+
+<script>
+    function showLoginAlert() {
+        alert("Sipariş vermek için önce giriş yapmalısınız.");
+    }
+</script>

@@ -68,6 +68,8 @@ namespace BookShopWebApp.Controllers
 		{
 			var categoryDto = _categoryManager.GetById(id);
 
+			
+
 			var booksDto = _bookManager.GetAll().Where(b => b.CategoryId == id).ToList();
 			var booksViewModel = _mapper.Map<List<BookViewModel>>(booksDto);
 

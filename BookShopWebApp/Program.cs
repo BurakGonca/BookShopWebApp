@@ -22,6 +22,8 @@ namespace BookShopWebApp
 				options.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti")));
 
 
+
+
 			//identity ekleme
 
 			//            builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
@@ -57,6 +59,8 @@ namespace BookShopWebApp
 			// Add services to the container
 			builder.Services.AddControllersWithViews();
 
+
+
 			// Dependency injection baðlantýlarý tanýmlama
 			builder.Services.AddScoped<BookRepo>();
 			builder.Services.AddScoped<BookService>();
@@ -66,8 +70,18 @@ namespace BookShopWebApp
 			builder.Services.AddScoped<CategoryService>();
 			builder.Services.AddScoped<CategoryManager>();
 
+			builder.Services.AddScoped<ShoppingCartRepo>();
+			builder.Services.AddScoped<ShoppingCartService>();
+			builder.Services.AddScoped<ShoppingCartManager>();
+
+			builder.Services.AddScoped<ShoppingCartBookRepo>();
+			builder.Services.AddScoped<ShoppingCartBookService>();
+			builder.Services.AddScoped<ShoppingCartBookManager>();
+
+
 			// Validation ekleme
 			builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 
 			var app = builder.Build();
 

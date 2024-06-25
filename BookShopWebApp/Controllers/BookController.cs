@@ -4,7 +4,11 @@ using BookShopWebApp.Models.HelperModels;
 using BS.BLL.Managers.Concrete;
 using BS.DAL.Services.Concrete;
 using BS.DTO.Concrete;
+using BS.Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BookShopWebApp.Controllers
 {
@@ -13,15 +17,20 @@ namespace BookShopWebApp.Controllers
 
 		private BookManager _bookManager;
 		private CategoryManager _categoryManager;
+		private UserManager<AppUser> _userManager;
+		private ShoppingCartManager _shoppingCartManager;
+		private ShoppingCartBookManager _shoppingCartBookManager;
+	
 
 		private IMapper _mapper;
 
-		public BookController(BookManager bookManager, CategoryManager categoryManager)
+		public BookController(BookManager bookManager, CategoryManager categoryManager, UserManager<AppUser> userManager, ShoppingCartManager shoppingCartManager, ShoppingCartBookManager shoppingCartBookManager)
 		{
 			_bookManager = bookManager;
 			_categoryManager = categoryManager;
-			
-
+			_userManager = userManager;
+			_shoppingCartManager = shoppingCartManager;
+			_shoppingCartBookManager = shoppingCartBookManager;
 
 			MapperConfiguration configuration = new MapperConfiguration(configuration =>
 			{
@@ -35,20 +44,17 @@ namespace BookShopWebApp.Controllers
 				configuration.CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
 
 
-				configuration.CreateMap<BookListViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
-				configuration.CreateMap<BookListViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
-				configuration.CreateMap<BookListViewModel, BookDto>().ForMember(x => x.Category, y => y.MapFrom(z => z.Category));
-				configuration.CreateMap<BookListViewModel, BookDto>().ReverseMap();
+				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
+				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
+
+				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ReverseMap();
 
 
 
 			});
 			_mapper = configuration.CreateMapper();
-
-
+			
 		}
-
-
 
 
 
@@ -80,41 +86,58 @@ namespace BookShopWebApp.Controllers
 				TotalPages = totalPages
 			};
 
+
+
+
 			return View(bookListModel);
 		}
 
 
-		//public IActionResult Index(int page = 1, int pageSize = 4)
-		//{
-		//	var categoryDto = _categoryManager.GetAll();
 
-		//	var booksDto = _bookManager.GetAll().ToList();
-		//	var booksViewModel = _mapper.Map<List<BookViewModel>>(booksDto);
+		public IActionResult AddToCart(int id)
+		{
+            
 
 
-		//	var totalBooks = booksViewModel.Count;
+            var userId = Convert.ToInt32(_userManager.GetUserId(HttpContext.User)); //sisteme login olanın id'sini verir.
 
-		//	Toplam sayfa sayısını hesaplama
-		//	var totalPages = (int)Math.Ceiling((double)totalBooks / pageSize);
+			var denemeler = _shoppingCartManager.GetAll().ToList(); //maplemeyi deneme amacli yazdım.
 
-		//	Mevcut sayfa numarasını kontrol
-		//	if (page < 1)
-		//		page = 1;
+			//ilk parametresi gelsin diye [0] yazdik.
+			var shoppingCartId = _shoppingCartManager.GetAll().Where((s => s.AppUserId == userId)).ToList()[0].Id; 
 
-		//	else if (page > totalPages)
-		//		page = totalPages;
+			ShoppingCartBookViewModel model = new ShoppingCartBookViewModel();
+
+			model.BookId = id;
+			model.ShoppingCartId = shoppingCartId;
+
+			
 
 
-		//	Mevcut sayfaya göre kitapları filtreleme
-		//   var currentPageBooks = booksViewModel.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+		
 
-		//	var categoryViewModel = _mapper.Map<CategoryViewModel>(categoryDto);
-		//	categoryViewModel.Books = currentPageBooks;
-		//	categoryViewModel.CurrentPage = page;
-		//	categoryViewModel.TotalPages = totalPages;
+			if (ModelState.IsValid)
+			{
+				ShoppingCartBookDto dto = new ShoppingCartBookDto();
+				dto.ShoppingCartId = model.ShoppingCartId;
+				dto.BookId = model.BookId;
+				dto.ShoppingCart= _shoppingCartManager.GetById(shoppingCartId);
+				dto.Book = _bookManager.GetById(id);
 
-		//	return View(categoryViewModel);
-		//}
+
+
+                _shoppingCartBookManager.Create(dto);
+
+				//bu userid ye ait shoppingcartid sini bulacağım.
+				//sonra da shoppingcartid ile methoda gelen ıd'yi kullanarak shopppinggcartbook inse
+
+				return RedirectToAction(nameof(Index));
+			}
+			
+			return View(model);
+			
+
+		}
 
 
 

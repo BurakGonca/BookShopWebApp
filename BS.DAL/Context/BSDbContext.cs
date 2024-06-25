@@ -50,7 +50,7 @@ namespace BS.DAL.Context
                         Id = userId,
                         Name = "Admin",
                         Surname = "Admin",
-                        Gender = Enums.Gender.Male,
+                        Gender = Enums.Gender.Belirtilmedi,
                         UserType = Enums.UserType.Admin,
                         UserName = "Admin",
                         NormalizedUserName = "ADMIN",
@@ -69,6 +69,15 @@ namespace BS.DAL.Context
                         NormalizedName = "Admin".ToUpper()
                     }
                 );
+
+            //modelBuilder.Entity<IdentityRole<int>>().HasData(
+            //       new IdentityRole<int>
+            //       {
+            //           Id = 2,
+            //           Name = "Customer",
+            //           NormalizedName = "Customer".ToUpper()
+            //       }
+            //   );
 
             //UserRole seed Data
 

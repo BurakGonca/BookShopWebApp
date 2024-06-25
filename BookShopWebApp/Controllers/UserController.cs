@@ -1,11 +1,14 @@
 ﻿using BookShopWebApp.Models;
 using BookShopWebApp.Models.Account;
+using BS.BLL.Managers.Concrete;
+using BS.DTO.Concrete;
 using BS.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Text;
+using System.Linq;
 
 namespace BookShopWebApp.Controllers
 {
@@ -17,18 +20,16 @@ namespace BookShopWebApp.Controllers
 		private readonly ICompositeViewEngine _viewEngine;
 		private readonly IConfiguration _configuration;
 
-		private readonly string _username;
-		private readonly string _password;
+		private readonly ShoppingCartManager _shoppingCartManager;
 
-		public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ICompositeViewEngine viewEngine, IConfiguration configuration, RoleManager<IdentityRole<int>> roleManager)
+		public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ICompositeViewEngine viewEngine, IConfiguration configuration, RoleManager<IdentityRole<int>> roleManager, ShoppingCartManager shoppingCartManager)
 		{
 			_userManager = userManager;
 			_signInManager = signInManager;
 			_viewEngine = viewEngine;
 			_configuration = configuration;
 			_roleManager = roleManager;
-
-			
+			_shoppingCartManager = shoppingCartManager;
 		}
 
 		public IActionResult Register()
@@ -37,8 +38,10 @@ namespace BookShopWebApp.Controllers
 			return View(model);
 		}
 
+
+
 		[HttpPost]
-		public IActionResult Register(UserViewModel model)
+		public async Task<IActionResult> Register(UserViewModel model)
 		{
 			ModelState.Remove("UserId");
 
@@ -49,21 +52,61 @@ namespace BookShopWebApp.Controllers
 
 			var users = _userManager.Users.ToList();
 
-			// User Kayıt işlemleri yapılacaktır.
+			foreach (var item in users)
+			{
+				if (model.Email == item.Email)
+				{
+					ViewBag.ErrorMessage = $"{model.Email} adresi zaten kayıtlıdır";
+					return View(model);
+				}
+			}
+
+			var hasher = new PasswordHasher<AppUser>();
+
 			AppUser user = new AppUser
 			{
 				Name = model.Name,
 				Surname = model.Surname,
 				Email = model.Email,
-				PasswordHash = model.Password,
+				EmailConfirmed = true,
+				NormalizedEmail = model.Email.ToUpper(),
+				PasswordHash = hasher.HashPassword(null, model.Password),
 				Adress = model.Adress,
-				Gender = model.Gender
+				Gender = model.Gender,
+				UserType = BS.Enums.UserType.Customer,
+				UserName = model.Name,
+				NormalizedUserName = model.Name.ToUpper()
 			};
 
-			IdentityResult result = _userManager.CreateAsync(user, model.Password).Result;
+			IdentityResult result = await _userManager.CreateAsync(user);
 
-			return RedirectToAction(nameof(Index));
+
+			ShoppingCartDto dto = new ShoppingCartDto();
+
+			dto.AppUserId = user.Id;
+
+			_shoppingCartManager.Create(dto);
+
+			if (result.Succeeded)
+			{
+				await _userManager.AddToRoleAsync(user, "Customer");
+
+
+				TempData["Message"] = "Kayıt başarılı! Giriş yapabilirsiniz.";
+
+				return RedirectToAction(nameof(Login));
+			}
+			else
+			{
+				ViewBag.ErrorMessage = "Kayıt başarısız, lütfen tüm alanları eksiksiz ve doğru bir şekilde doldurunuz";
+				return View(model);
+			}
+
+
 		}
+
+
+
 
 		public IActionResult Login()
 		{
@@ -83,7 +126,7 @@ namespace BookShopWebApp.Controllers
 
 			if (user == null)
 			{
-				ViewBag.ErrorMessage = "Kullanıcı adı veya şifre yanlıştır.";
+				ViewBag.ErrorMessage = "Kullanıcı adı  yanlıştır.";
 				return View(model);
 			}
 
@@ -91,20 +134,26 @@ namespace BookShopWebApp.Controllers
 
 			if (!signInResult.Succeeded)
 			{
-				bool emailConfirm = _userManager.IsEmailConfirmedAsync(user).Result;
-
-				if (!emailConfirm)
-				{
-					ViewBag.ErrorMessage = "Mail doğrulanmamıştır.";
-					return View(model);
-				}
-
-				ViewBag.ErrorMessage = "Kullanıcı adı veya şifre yanlıştır.";
+				ViewBag.ErrorMessage = "Şifre yanlıştır.";
 				return View(model);
 			}
 
+			ViewBag.LoginSuccess = user.Name;
 			return RedirectToAction("Index", "Home");
 		}
+
+
+
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Home");
+		}
+
+
+
+
+
 	}
 }
 

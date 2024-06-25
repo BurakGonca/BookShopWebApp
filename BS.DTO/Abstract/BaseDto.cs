@@ -10,7 +10,7 @@ namespace BS.DTO.Abstract
 	{
 
 		public int Id { get; set; }
-		public int RowNum { get; set; }
+	
 
 
 

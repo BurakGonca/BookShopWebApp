@@ -1,4 +1,5 @@
 ﻿using BS.DTO.Abstract;
+using BS.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace BS.DTO.Concrete
 
 		public IEnumerable<CommentDto>? Comments { get; set; }
 		public IEnumerable<OrderDetailDto>? OrderDetails { get; set; }
-
+		public IEnumerable<ShoppingCartBookDto> ShoppingCartBooks { get; set; }
 
 		public int CategoryId { get; set; }
 		public CategoryDto? Category { get; set; }

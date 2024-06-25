@@ -22,7 +22,7 @@ namespace BS.DTO.Concrete
 
         public IEnumerable<CommentDto>? Comments { get; set; }
         public IEnumerable<OrderDto>? Orders { get; set; }
-        public IEnumerable<ShoppingCartDto>? ShoppingCarts { get; set; }
+        public ShoppingCartDto? ShoppingCart { get; set; }
         public IEnumerable<OrderDetailDto>? OrderDetails { get; set; }
 
     }
