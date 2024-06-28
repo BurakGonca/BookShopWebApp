@@ -1,4 +1,4 @@
-# ASP.NET Core MVC BurakKitap Projesi (N-Tier Architecture)
+# ASP.NET Core MVC BurakKitap E-Ticaret Projesi (N-Tier Architecture)
 
 Kullanılan Teknolojiler
 Geliştirme Ortamı: Ms Visual Studio 2022
