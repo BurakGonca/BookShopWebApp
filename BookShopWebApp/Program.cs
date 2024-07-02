@@ -8,6 +8,9 @@ using BS.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation;
 using System.Reflection;
+using AutoMapper;
+using BS.DAL.Profiles;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookShopWebApp
 {
@@ -51,6 +54,11 @@ namespace BookShopWebApp
 				options.LoginPath = "/Admin/Account/Login";    // account/login
 				options.LogoutPath = "/Admin/Account/Logout";  // account/logout
 			});
+
+
+
+
+			//builder.Services.AddAutoMapper(typeof(Program));
 
 
 

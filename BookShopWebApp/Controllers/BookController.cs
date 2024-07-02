@@ -5,10 +5,12 @@ using BS.BLL.Managers.Concrete;
 using BS.DAL.Services.Concrete;
 using BS.DTO.Concrete;
 using BS.Entities.Concrete;
+using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookShopWebApp.Controllers
 {
@@ -24,46 +26,100 @@ namespace BookShopWebApp.Controllers
 
 		private IMapper _mapper;
 
-		public BookController(BookManager bookManager, CategoryManager categoryManager, UserManager<AppUser> userManager, ShoppingCartManager shoppingCartManager, ShoppingCartBookManager shoppingCartBookManager)
-		{
-			_bookManager = bookManager;
-			_categoryManager = categoryManager;
-			_userManager = userManager;
-			_shoppingCartManager = shoppingCartManager;
-			_shoppingCartBookManager = shoppingCartBookManager;
+        //public BookController(BookManager bookManager, CategoryManager categoryManager, UserManager<AppUser> userManager, ShoppingCartManager shoppingCartManager, ShoppingCartBookManager shoppingCartBookManager)
+        //{
+        //    _bookManager = bookManager;
+        //    _categoryManager = categoryManager;
+        //    _userManager = userManager;
+        //    _shoppingCartManager = shoppingCartManager;
+        //    _shoppingCartBookManager = shoppingCartBookManager;
 
-			MapperConfiguration configuration = new MapperConfiguration(configuration =>
-			{
-
-				configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
-				configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
-				configuration.CreateMap<BookViewModel, BookDto>().ReverseMap();
-
-
-				configuration.CreateMap<CategoryViewModel, CategoryDto>().ForMember(x => x.Books, y => y.MapFrom(z => z.Books));
-				configuration.CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
-
-
-				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
-				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
-
-				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ReverseMap();
-
-
-
-			});
-			_mapper = configuration.CreateMapper();
-			
-		}
+        //    MapperConfiguration configuration = new MapperConfiguration(configuration =>
+        //    {
+        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
+        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
+        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
+        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Category, y => y.MapFrom(z => z.Category));
+        //        configuration.CreateMap<BookViewModel, BookDto>().ReverseMap();
 
 
 
 
+        //        configuration.CreateMap<CategoryViewModel, CategoryDto>().ForMember(x => x.Books, y => y.MapFrom(z => z.Books));
+        //        configuration.CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
+
+        //        configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
+        //        configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
+        //        configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ReverseMap();
+
+
+        //        // Yeni mappingler
+        //        configuration.CreateMap<BookDto, Book>().ReverseMap();
+        //        configuration.CreateMap<CategoryDto, Category>().ReverseMap();
+        //        configuration.CreateMap<ShoppingCartDto, ShoppingCart>().ReverseMap();
+        //        configuration.CreateMap<ShoppingCartBookDto, ShoppingCartBook>().ReverseMap();
+
+        //        configuration.CreateMap<ShoppingCartBookViewModel, ShoppingCartBookDto>().ReverseMap();
 
 
 
 
-		public IActionResult Index(int page = 1, int pageSize = 12)
+
+        //    });
+
+
+
+
+        //    _mapper = configuration.CreateMapper();
+
+        //    //_mapper.ConfigurationProvider.AssertConfigurationIsValid();
+        //}
+
+
+        public BookController(BookManager bookManager, CategoryManager categoryManager, UserManager<AppUser> userManager, ShoppingCartManager shoppingCartManager, ShoppingCartBookManager shoppingCartBookManager)
+        {
+            _bookManager = bookManager;
+            _categoryManager = categoryManager;
+            _userManager = userManager;
+            _shoppingCartManager = shoppingCartManager;
+            _shoppingCartBookManager = shoppingCartBookManager;
+
+            MapperConfiguration configuration = new MapperConfiguration(configuration =>
+            {
+                configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
+                configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
+                configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
+                configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Category, y => y.MapFrom(z => z.Category));
+                configuration.CreateMap<BookViewModel, BookDto>().ReverseMap();
+
+                configuration.CreateMap<CategoryViewModel, CategoryDto>().ForMember(x => x.Books, y => y.MapFrom(z => z.Books));
+                configuration.CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
+
+                configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
+                configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
+                configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ReverseMap();
+
+                // Yeni mappingler
+                configuration.CreateMap<BookDto, Book>().ReverseMap();
+                configuration.CreateMap<CategoryDto, Category>().ReverseMap();
+                configuration.CreateMap<ShoppingCartDto, ShoppingCart>().ReverseMap();
+                configuration.CreateMap<ShoppingCartBookDto, ShoppingCartBook>().ReverseMap();
+
+                configuration.CreateMap<ShoppingCartBookViewModel, ShoppingCartBookDto>().ReverseMap();
+            });
+
+            _mapper = configuration.CreateMapper();
+
+            //_mapper.ConfigurationProvider.AssertConfigurationIsValid();
+        }
+
+
+
+
+
+
+
+        public IActionResult Index(int page = 1, int pageSize = 12)
 		{
 			var booksDto = _bookManager.GetAll().ToList();
 			var booksViewModel = _mapper.Map<List<BookViewModel>>(booksDto);
@@ -94,50 +150,41 @@ namespace BookShopWebApp.Controllers
 
 
 
-		public IActionResult AddToCart(int id)
-		{
-            
 
+        /// <summary>
+        /// Kitap kartlarının üzerinde bulunan sepete ekle butonuna basınca kitabın Id'si ile login olan kullanıcının idsi üzerinden shoppingcartbook cross tablosuna insert edilmektedir.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult AddToCart(int id)
+        {
+            // Sisteme login olan kullanıcının ID'sini veriyor
+            var userId = Convert.ToInt32(_userManager.GetUserId(HttpContext.User));
 
-            var userId = Convert.ToInt32(_userManager.GetUserId(HttpContext.User)); //sisteme login olanın id'sini verir.
+            //her kullanıcı insert edilirken kendisine bir shoppingcart da insert etmistim
+            var shoppingCart = _shoppingCartManager.GetAll().FirstOrDefault(s => s.AppUserId == userId);
 
-			var denemeler = _shoppingCartManager.GetAll().ToList(); //maplemeyi deneme amacli yazdım.
+                        
+            var shoppingCartId = shoppingCart.Id;
 
-			//ilk parametresi gelsin diye [0] yazdik.
-			var shoppingCartId = _shoppingCartManager.GetAll().Where((s => s.AppUserId == userId)).ToList()[0].Id; 
+            if (ModelState.IsValid)
+            {
+                
+                ShoppingCartBookDto dto = new ShoppingCartBookDto
+                {
+                    ShoppingCartId = shoppingCartId,
+                    BookId = id,
+                    
+                };
 
-			ShoppingCartBookViewModel model = new ShoppingCartBookViewModel();
-
-			model.BookId = id;
-			model.ShoppingCartId = shoppingCartId;
-
-			
-
-
-		
-
-			if (ModelState.IsValid)
-			{
-				ShoppingCartBookDto dto = new ShoppingCartBookDto();
-				dto.ShoppingCartId = model.ShoppingCartId;
-				dto.BookId = model.BookId;
-				dto.ShoppingCart= _shoppingCartManager.GetById(shoppingCartId);
-				dto.Book = _bookManager.GetById(id);
-
-
-
+                
                 _shoppingCartBookManager.Create(dto);
 
-				//bu userid ye ait shoppingcartid sini bulacağım.
-				//sonra da shoppingcartid ile methoda gelen ıd'yi kullanarak shopppinggcartbook inse
+                return RedirectToAction(nameof(Index));
+            }
 
-				return RedirectToAction(nameof(Index));
-			}
-			
-			return View(model);
-			
-
-		}
+            return View();
+        }
 
 
 
@@ -148,10 +195,7 @@ namespace BookShopWebApp.Controllers
 
 
 
-
-
-
-	}
+    }
 
 
 

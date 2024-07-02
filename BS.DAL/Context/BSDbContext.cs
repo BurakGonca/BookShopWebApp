@@ -21,7 +21,7 @@ namespace BS.DAL.Context
         public DbSet<Payment> Payments { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
-        
+
 
 
         public BSDbContext(DbContextOptions<BSDbContext> options) : base(options)
@@ -88,6 +88,12 @@ namespace BS.DAL.Context
                         RoleId = roleId
                     }
                 );
+
+
+
+
+            
+
 
 
 

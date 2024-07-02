@@ -19,6 +19,7 @@ namespace BS.DTO.Concrete
 
 		//iliskiler
 
+
 		public OrderDto? Order { get; set; }
 
 		public IEnumerable<ShoppingCartBookDto>? ShoppingCartBooks { get; set; }

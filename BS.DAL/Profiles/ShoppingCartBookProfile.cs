@@ -11,37 +11,58 @@ namespace BS.DAL.Profiles
 {
 	public class ShoppingCartBookProfile : Profile
 	{
-		public ShoppingCartBookProfile()
-		{
-			//CreateMap<AppUser, AppUserDto>()
-			//   .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
-			//   .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
-			//   .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => src.Orders))
-			//   .ReverseMap();
-
-			CreateMap<Book, BookDto>().ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore()).ReverseMap();
-			CreateMap<Book, BookDto>().ForMember(dest => dest.OrderDetails, opt => opt.Ignore()).ReverseMap();
-			CreateMap<Book, BookDto>().ForMember(dest => dest.Category, opt => opt.Ignore()).ReverseMap();
-			CreateMap<Book, BookDto>().ForMember(dest => dest.Comments, opt => opt.Ignore()).ReverseMap();
-
-
-            CreateMap<ShoppingCart, ShoppingCartDto>().ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore()).ReverseMap();
-            CreateMap<ShoppingCart, ShoppingCartDto>().ForMember(dest => dest.Order, opt => opt.Ignore()).ReverseMap();
-            CreateMap<ShoppingCart, ShoppingCartDto>().ForMember(dest => dest.AppUser, opt => opt.Ignore()).ReverseMap();
         
+        public ShoppingCartBookProfile()
+        {
+            CreateMap<ShoppingCartBook, ShoppingCartBookDto>().ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
+            CreateMap<ShoppingCartBookDto, ShoppingCartBook>().ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book));
 
-            //CreateMap<ShoppingCartBook, ShoppingCartBookDto>()
-            //   .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
-            //   .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
-            //   .ReverseMap();
+            CreateMap<ShoppingCartBook, ShoppingCartBookDto>().ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart));
+            CreateMap<ShoppingCartBookDto, ShoppingCartBook>().ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart));
+
+            CreateMap<Book, BookDto>().ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category)).ReverseMap();
+            CreateMap<BookDto, Book>().ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category)).ReverseMap();
+
+            CreateMap<Book, BookDto>().ForMember(dest => dest.Comments, opt => opt.Ignore());
+            CreateMap<BookDto, Book>().ForMember(dest => dest.Comments, opt => opt.Ignore());
+
+            CreateMap<Book, BookDto>().ForMember(dest => dest.OrderDetails, opt => opt.Ignore());
+            CreateMap<BookDto, Book>().ForMember(dest => dest.OrderDetails, opt => opt.Ignore());
+
+            CreateMap<Book, BookDto>().ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore());
+            CreateMap<BookDto, Book>().ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore());
+
+            CreateMap<ShoppingCart, ShoppingCartDto>().ForMember(dest => dest.Order, opt => opt.Ignore());
+            CreateMap<ShoppingCartDto, ShoppingCart>().ForMember(dest => dest.Order, opt => opt.Ignore());
+
+            CreateMap<ShoppingCart, ShoppingCartDto>().ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore());
+            CreateMap<ShoppingCartDto, ShoppingCart>().ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore());
+
+            CreateMap<ShoppingCart, ShoppingCartDto>().ForMember(dest => dest.AppUser, opt => opt.Ignore());
+            CreateMap<ShoppingCartDto, ShoppingCart>().ForMember(dest => dest.AppUser, opt => opt.Ignore());
+
+            CreateMap<Category, CategoryDto>().ReverseMap();
 
 
-     
+
+
+
+
+            CreateMap<ShoppingCartBookDto, ShoppingCartBook>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
+            .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart));
+
+            CreateMap<ShoppingCartBook, ShoppingCartBookDto>();
+
+
+
 
 
         }
 
 
 
-	}
+
+    }
 }

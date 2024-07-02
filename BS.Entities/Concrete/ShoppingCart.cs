@@ -20,6 +20,7 @@ namespace BS.Entities.Concrete
 
         //iliskiler
 
+
         public Order? Order { get; set; }
 
 

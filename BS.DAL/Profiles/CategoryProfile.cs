@@ -44,7 +44,17 @@ namespace BS.DAL.Profiles
 
 
 
-		}
+
+
+
+            CreateMap<CategoryDto, Category>()
+           .ForMember(dest => dest.Id, opt => opt.Ignore())
+           .ForMember(dest => dest.Books, opt => opt.Ignore());
+
+            CreateMap<Category, CategoryDto>();
+
+
+        }
 
 
     }

@@ -20,7 +20,7 @@ namespace BS.DAL.Profiles
 
 
 
-			CreateMap<CategoryDto, Category>().ForMember(dest => dest.Books, opt => opt.Ignore()).ReverseMap();
+		
 
 			CreateMap<AppUser, AppUserDto>()
 			   .ForMember(dest => dest.OrderDetails, opt => opt.Ignore()).ReverseMap();
@@ -55,9 +55,22 @@ namespace BS.DAL.Profiles
 			   .ForMember(dest => dest.Book, opt => opt.Ignore()).ReverseMap();
 			CreateMap<ShoppingCartBook, ShoppingCartBookDto>()
 			   .ForMember(dest => dest.ShoppingCart, opt => opt.Ignore()).ReverseMap();
-			  
 
-		}
+
+
+
+
+
+
+            CreateMap<ShoppingCartDto, ShoppingCart>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.AppUser, opt => opt.Ignore())
+            .ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore())
+            .ForMember(dest => dest.Order, opt => opt.Ignore());
+
+            CreateMap<ShoppingCart, ShoppingCartDto>();
+
+        }
 
 	}
 }
