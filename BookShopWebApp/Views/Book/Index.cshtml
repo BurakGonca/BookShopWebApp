@@ -18,6 +18,7 @@
     </div>
 </div>
 
+ 
 <div class="container">
     <div class="row">
         @foreach (var book in Model.Books)
@@ -43,6 +44,13 @@
                         @if (isUserLoggedIn)
                         {
                             <a asp-route-id="@book.Id" asp-action="AddToCart" type="submit" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+
+                            <!-- Button trigger modal -->
+@*                             <a asp-route-id="@book.Id" asp-action="AddToCart" type="submit" class="btn btn-small" data-toggle="modal" data-target="#myModal">
+                               Sepete Ekle
+                            </a> *@
+                           
+
                         }
                         else
                         {
@@ -63,9 +71,50 @@
         }
     </ul>
 </div>
+ 
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sepet</h4>
+            </div>
+            <div class="modal-body">
+                @ViewBag.ModalMessage
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary">Sepete Git</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <script>
+
     function showLoginAlert() {
         alert("Sipariş vermek için önce giriş yapmalısınız.");
     }
+
+
+
 </script>
+
+@if ((bool)ViewBag.AddToCart)
+{
+    @section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myModal').modal('show');
+        });
+    </script>
+    }
+
+}

@@ -31,7 +31,7 @@ $(document).ready(function(){
 	});
 
 	//Make Videos Responsive
-	$(".video-wrapper").fitVids();
+	//$(".video-wrapper").fitVids();
 
 	//Initialize tooltips
 	$('.show-tooltip').tooltip();

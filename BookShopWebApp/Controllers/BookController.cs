@@ -9,7 +9,9 @@ using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Linq;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookShopWebApp.Controllers
@@ -142,7 +144,14 @@ namespace BookShopWebApp.Controllers
 				TotalPages = totalPages
 			};
 
+            ViewBag.AddToCart = false;
 
+            if (TempData.ContainsKey("AddToCart"))
+            {
+                bool addToCart = (bool)TempData["AddToCart"];
+                ViewBag.ModalMessage = TempData["ModalMessage"].ToString();
+                ViewBag.AddToCart = addToCart;
+            }
 
 
 			return View(bookListModel);
@@ -167,6 +176,8 @@ namespace BookShopWebApp.Controllers
                         
             var shoppingCartId = shoppingCart.Id;
 
+            TempData["AddToCart"] = false;
+
             if (ModelState.IsValid)
             {
                 
@@ -180,10 +191,13 @@ namespace BookShopWebApp.Controllers
                 
                 _shoppingCartBookManager.Create(dto);
 
-                return RedirectToAction(nameof(Index));
+                BookDto bookDto =  _bookManager.GetById(id);
+
+                TempData["AddToCart"] = true;
+                TempData["ModalMessage"] = bookDto.BookName + " adlı kitap sepetinize başarıyla eklenmiştir. " + DateTime.Now.ToString();
             }
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
 
