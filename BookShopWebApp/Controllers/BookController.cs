@@ -28,56 +28,7 @@ namespace BookShopWebApp.Controllers
 
 		private IMapper _mapper;
 
-        //public BookController(BookManager bookManager, CategoryManager categoryManager, UserManager<AppUser> userManager, ShoppingCartManager shoppingCartManager, ShoppingCartBookManager shoppingCartBookManager)
-        //{
-        //    _bookManager = bookManager;
-        //    _categoryManager = categoryManager;
-        //    _userManager = userManager;
-        //    _shoppingCartManager = shoppingCartManager;
-        //    _shoppingCartBookManager = shoppingCartBookManager;
-
-        //    MapperConfiguration configuration = new MapperConfiguration(configuration =>
-        //    {
-        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
-        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
-        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
-        //        configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Category, y => y.MapFrom(z => z.Category));
-        //        configuration.CreateMap<BookViewModel, BookDto>().ReverseMap();
-
-
-
-
-        //        configuration.CreateMap<CategoryViewModel, CategoryDto>().ForMember(x => x.Books, y => y.MapFrom(z => z.Books));
-        //        configuration.CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
-
-        //        configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
-        //        configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
-        //        configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ReverseMap();
-
-
-        //        // Yeni mappingler
-        //        configuration.CreateMap<BookDto, Book>().ReverseMap();
-        //        configuration.CreateMap<CategoryDto, Category>().ReverseMap();
-        //        configuration.CreateMap<ShoppingCartDto, ShoppingCart>().ReverseMap();
-        //        configuration.CreateMap<ShoppingCartBookDto, ShoppingCartBook>().ReverseMap();
-
-        //        configuration.CreateMap<ShoppingCartBookViewModel, ShoppingCartBookDto>().ReverseMap();
-
-
-
-
-
-        //    });
-
-
-
-
-        //    _mapper = configuration.CreateMapper();
-
-        //    //_mapper.ConfigurationProvider.AssertConfigurationIsValid();
-        //}
-
-
+        
         public BookController(BookManager bookManager, CategoryManager categoryManager, UserManager<AppUser> userManager, ShoppingCartManager shoppingCartManager, ShoppingCartBookManager shoppingCartBookManager)
         {
             _bookManager = bookManager;
@@ -197,8 +148,13 @@ namespace BookShopWebApp.Controllers
                 TempData["ModalMessage"] = bookDto.BookName + " adlı kitap sepetinize başarıyla eklenmiştir. " + DateTime.Now.ToString();
             }
 
-            return RedirectToAction(nameof(Index));
-        }
+			
+
+			
+			return RedirectToAction(nameof(Index));
+
+
+		}
 
 
 

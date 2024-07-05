@@ -1,1 +1,47 @@
-﻿
+﻿@model ShoppingCartViewModel
+
+@{
+	ViewData["Title"] = "Sepet";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="section section-breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Alışveriş Sepeti</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Sıra No</th>
+			<th>Kitap Adı</th>
+			<th>Kitap Fiyatı</th>
+			<th>Toplam Fiyat</th>
+			<th>İşlem</th>
+		</tr>
+		<tbody>
+			@{
+				int rowNumber = 1;
+			}
+			@foreach (var item in Model.ShoppingCartBooks)
+			{
+				<tr>
+					<td>@rowNumber</td>
+				<td>@item.Book.BookName</td> 
+				<td>@item.Book.Price.ToString("c")</td>
+				@* <td>@item.TotalPrice.ToString("c")</td> *@
+				<td>
+
+
+				</tr>
+			}
+
+		</tbody>
+</table>

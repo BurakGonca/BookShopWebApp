@@ -30,13 +30,14 @@
             <div class="menuextras">
                 <div class="extras">
                     <ul>
-                        <li class="shopping-cart-items" style="margin-top:47px; font-size:17px;">
-                            <a href="~/bookshop/page-shopping-cart.html">
-                                <i class="glyphicon glyphicon-shopping-cart icon-white"></i>
-                            </a>
-                        </li>
+                       
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <li class="shopping-cart-items" style="margin-top:47px; font-size:17px;">
+                                <a asp-action="Index" asp-controller="ShoppingCart">
+                                    <i class="glyphicon glyphicon-shopping-cart icon-white"></i>
+                                </a>
+                            </li>
                             <li style="margin-top:47px; font-size:16px;">
                                 <span><b>Hoşgeldin @User.Identity.Name</b></span>
                                 <a asp-controller="User" asp-action="Logout">

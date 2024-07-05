@@ -20,5 +20,8 @@
         public int CurrentPage { get; set; } // Şu anki sayfa numarası
         public int TotalPages { get; set; } // Toplam sayfa sayısı
 
+
+        
+
     }
 }

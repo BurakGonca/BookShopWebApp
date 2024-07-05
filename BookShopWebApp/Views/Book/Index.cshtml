@@ -1,97 +1,109 @@
-﻿
-
- @using BookShopWebApp.Models.HelperModels
+﻿ @using BookShopWebApp.Models.HelperModels
 
 @{
-    ViewData["Title"] = "Tüm Kitaplar";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    bool isUserLoggedIn = User.Identity.IsAuthenticated;
+	ViewData["Title"] = "Tüm Kitaplar";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	bool isUserLoggedIn = User.Identity.IsAuthenticated;
 }
 
 <div class="section section-breadcrumbs">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Tüm Kitaplar</h1>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Tüm Kitaplar</h1>
+			</div>
+		</div>
+	</div>
 </div>
 
- 
+
 <div class="container">
-    <div class="row">
-        @foreach (var book in Model.Books)
-        {
-            <div class="col-md-2 col-sm-4">
-                <div class="shop-item">
-                    <div class="shop-item-image">
-                        <a href="#">
-                            <img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:200px; object-fit: cover;">
-                        </a>
-                    </div>
+	<div class="row">
+		@foreach (var book in Model.Books)
+		{
+			<div class="col-md-2 col-sm-4">
+				<div class="shop-item">
+					<div class="shop-item-image">
+						<a href="#">
+							<img src="~/images/@book.ImageName" alt="@book.BookName" style="width: 100%; height:200px; object-fit: cover;">
+						</a>
+					</div>
 
-                    <div class="title">
-                        <h3><a href="page-product-details.html">@book.BookName</a></h3>
-                        <h4>@book.AuthorName @book.AuthorSurname</h4>
-                    </div>
+					<div class="title">
+						<h3><a href="page-product-details.html">@book.BookName</a></h3>
+						<h4>@book.AuthorName @book.AuthorSurname</h4>
+					</div>
 
-                    <div class="price">
-                        @book.Price TL
-                    </div>
+					<div class="price">
+						@book.Price TL
+					</div>
 
-                    <div class="actions">
-                        @if (isUserLoggedIn)
-                        {
-                            <a asp-route-id="@book.Id" asp-action="AddToCart" type="submit" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+					@*  <div class="actions">
+				@if (isUserLoggedIn)
+				{
+				<a asp-route-id="@book.Id" asp-action="AddToCart" type="submit" class="btn btn-small"> Sepete Ekle </a>
 
-                            <!-- Button trigger modal -->
-@*                             <a asp-route-id="@book.Id" asp-action="AddToCart" type="submit" class="btn btn-small" data-toggle="modal" data-target="#myModal">
-                               Sepete Ekle
-                            </a> *@
-                           
 
-                        }
-                        else
-                        {
-                            <button onclick="showLoginAlert()" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</button>
-                        }
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+				}
+				else
+				{
+				<button onclick="showLoginAlert()" class="btn btn-small">Sepete Ekle</button>
+				}
+				</div> *@
+
+					<div class="actions">
+						@if (isUserLoggedIn)
+						{
+							<form asp-action="AddToCart" asp-controller="Book" method="post">
+								@* <input type="hidden" name="sourcePage" value="book/index" /> *@
+								<input type="hidden" name="id" value="@book.Id" />
+								<button type="submit" class="btn btn-small">Sepete Ekle</button>
+							</form>
+						}
+						else
+						{
+							<button onclick="showLoginAlert()" class="btn btn-small">Sepete Ekle</button>
+						}
+					</div>
+
+
+
+				</div>
+			</div>
+		}
+	</div>
 </div>
+
 
 <div class="pagination-wrapper">
-    <ul class="pagination pagination-lg">
-        @for (var i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="@(i == Model.CurrentPage ? "active" : "")"><a href="?page=@i">@i</a></li>
-        }
-    </ul>
+	<ul class="pagination pagination-lg">
+		@for (var i = 1; i <= Model.TotalPages; i++)
+		{
+			<li class="@(i == Model.CurrentPage ? "active" : "")"><a href="?page=@i">@i</a></li>
+		}
+	</ul>
 </div>
- 
+
 
 
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Sepet</h4>
-            </div>
-            <div class="modal-body">
-                @ViewBag.ModalMessage
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                <button type="button" class="btn btn-primary">Sepete Git</button>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Sepet</h4>
+			</div>
+			<div class="modal-body">
+				@ViewBag.ModalMessage
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+				<a asp-action="Index" asp-controller="ShoppingCart" type="button" class="btn btn-primary">Sepete Git</a>
+			</div>
+		</div>
+	</div>
 </div>
 
 
@@ -99,9 +111,9 @@
 
 <script>
 
-    function showLoginAlert() {
-        alert("Sipariş vermek için önce giriş yapmalısınız.");
-    }
+	function showLoginAlert() {
+		alert("Sipariş vermek için önce giriş yapmalısınız.");
+	}
 
 
 
@@ -109,12 +121,12 @@
 
 @if ((bool)ViewBag.AddToCart)
 {
-    @section scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#myModal').modal('show');
-        });
-    </script>
-    }
+	@section scripts {
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#myModal').modal('show');
+		});
+	</script>
+	}
 
 }

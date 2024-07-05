@@ -74,13 +74,17 @@
 						<div class="actions">
 							@if (isUserLoggedIn)
 							{
-								<a asp-route-id="@book.Id" asp-controller="Book" asp-action="AddToCart" type="submit" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</a>
+								<form asp-action="AddToCart" asp-controller="Book" method="post">
+									<input type="hidden" name="id" value="@book.Id" />
+									<button type="submit" class="btn btn-small">Sepete Ekle</button>
+								</form>
 							}
 							else
 							{
-								<button onclick="showLoginAlert()" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Sepete Ekle</button>
+								<button onclick="showLoginAlert()" class="btn btn-small">Sepete Ekle</button>
 							}
 						</div>
+
 					</div>
 				</div>
 

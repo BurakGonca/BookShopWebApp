@@ -9,18 +9,18 @@ namespace BookShopWebApp.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		
 
 		private BookManager _bookManager;
-		private CategoryManager _categoryManager;
+		
 
 		private IMapper _mapper;
 
-		public HomeController(ILogger<HomeController> logger, BookManager bookManager, CategoryManager categoryManager)
+		public HomeController(BookManager bookManager)
 		{
-			_logger = logger;
+			
 			_bookManager = bookManager;
-			_categoryManager = categoryManager;
+			
 
 			
 
@@ -49,6 +49,12 @@ namespace BookShopWebApp.Controllers
 		public IActionResult Index()
 		{
 			List<BookDto> bookDtos = _bookManager.GetAll().Take(6).ToList();
+			
+
+			
+
+
+
 
 			List<BookViewModel> models = new List<BookViewModel>();
 
@@ -85,5 +91,9 @@ namespace BookShopWebApp.Controllers
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
+
+
+		
+
 	}
 }

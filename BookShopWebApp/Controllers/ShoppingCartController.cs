@@ -22,15 +22,23 @@ namespace BookShopWebApp.Controllers
             MapperConfiguration configuration = new MapperConfiguration(configuration =>
             {
 
-                configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
-                configuration.CreateMap<BookViewModel, BookDto>().ForMember(x => x.Comments, y => y.MapFrom(z => z.Comments));
-
-                configuration.CreateMap<BookViewModel, BookDto>().ReverseMap();
-
-
+                configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.Order, y => y.MapFrom(z => z.Order));
+                configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.ShoppingCartBooks, y => y.MapFrom(z => z.ShoppingCartBooks));
+                configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
+				configuration.CreateMap<ShoppingCartViewModel, ShoppingCartDto>().ReverseMap();
 
                 configuration.CreateMap<UserViewModel, AppUserDto>().ForMember(x => x.ShoppingCart, y => y.MapFrom(z => z.ShoppingCart));
+				configuration.CreateMap<UserViewModel, AppUserDto>().ReverseMap();
 
+                configuration.CreateMap<OrderViewModel, OrderDto>().ForMember(x => x.Payment, y => y.MapFrom(z => z.Payment));
+                configuration.CreateMap<OrderViewModel, OrderDto>().ForMember(x => x.AppUser, y => y.MapFrom(z => z.User));
+                configuration.CreateMap<OrderViewModel, OrderDto>().ForMember(x => x.ShoppingCart, y => y.MapFrom(z => z.ShoppingCart));
+                configuration.CreateMap<OrderViewModel, OrderDto>().ForMember(x => x.OrderDetails, y => y.MapFrom(z => z.OrderDetails));
+				configuration.CreateMap<OrderViewModel, OrderDto>().ReverseMap();
+
+                configuration.CreateMap<ShoppingCartBookViewModel, ShoppingCartBookDto>().ForMember(x => x.ShoppingCart, y => y.MapFrom(z => z.ShoppingCart));
+                configuration.CreateMap<ShoppingCartBookViewModel, ShoppingCartBookDto>().ForMember(x => x.Book, y => y.MapFrom(z => z.Book));
+				configuration.CreateMap<ShoppingCartBookViewModel, ShoppingCartBookDto>().ReverseMap();
 
 
 
@@ -74,7 +82,7 @@ namespace BookShopWebApp.Controllers
 				.Where(cart => cart.AppUserId.ToString() == userId)
 				.ToList();
 
-			List<ShoppingCartViewModel> models = new List<ShoppingCartViewModel>();
+			List<ShoppingCartViewModel> models = _mapper.Map<List<ShoppingCartViewModel>>(shoppingCartDto);
 
 			foreach (var dto in shoppingCartDto)
 			{
@@ -85,12 +93,13 @@ namespace BookShopWebApp.Controllers
 			return View(models);
 		}
 
+        //var booksDto = _bookManager.GetAll().ToList();
+        //var booksViewModel = _mapper.Map<List<BookViewModel>>(booksDto);
 
 
 
 
 
 
-
-	}
+    }
 }

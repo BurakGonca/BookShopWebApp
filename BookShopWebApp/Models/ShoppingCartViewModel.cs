@@ -7,7 +7,7 @@ namespace BookShopWebApp.Models
 
 		public int Id { get; set; }
 
-		public double? TotalPrice { get; set; }
+		public double TotalPrice { get; set; }
 		public bool? IsActive { get; set; }
 
 
@@ -24,6 +24,12 @@ namespace BookShopWebApp.Models
 		public int UserId { get; set; }
 		public UserViewModel? User { get; set; }
 
-		
-	}
+
+
+        //yardımcı proplar
+
+        //public int? BookId { get; set; }
+        //public BookViewModel? Book { get; set; }
+
+    }
 }
