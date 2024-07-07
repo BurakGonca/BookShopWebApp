@@ -1,0 +1,121 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Profil Güncelleme";
+}
+
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@ViewData["Title"] - BurakKitap</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="~/bookshop/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/bookshop/css/icomoon-social.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="~/bookshop/css/leaflet.css" />
+    <link rel="stylesheet" href="~/bookshop/css/main.css">
+
+    <script src="~/bookshop/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Page Title -->
+    <div class="section section-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Sayın @User.Identity.Name  bilgilerinizi buradan güncelleyebilirsiniz</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="basic-login">
+                        @if (ViewBag.ErrorMessage is not null)
+                        {
+                            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+                        }
+                        <form asp-controller="User" asp-action="Edit" role="form" method="post">
+                            <div class="form-group">
+                                <input type="hidden" asp-for="UserId" />
+                                <label for="Name"><i class="icon-user"></i> <b>Ad</b></label>
+                                <input asp-for="Name" class="form-control" id="Name" type="text" value="@Model.Name">
+                            </div>
+                            <span asp-validation-for="Name" class="d-block text-danger"></span>
+
+                            <div class="form-group">
+                                <label for="Surname"><i class="icon-user"></i> <b>Soyad</b></label>
+                                <input asp-for="Surname" class="form-control" id="Surname" type="text" value="@Model.Surname">
+                            </div>
+                            <span asp-validation-for="Surname" class="d-block text-danger"></span>
+
+                            <div class="form-group">
+                                <label for="Email"><i class="icon-user"></i> <b>E-mail</b></label>
+                                <input asp-for="Email" class="form-control" id="Email" type="email" value="@Model.Email">
+                            </div>
+                            <span asp-validation-for="Email" class="d-block text-danger"></span>
+
+                            <div class="form-group">
+                                <label for="Adress"><i class="icon-user"></i> <b>Adres</b></label>
+                                <input asp-for="Adress" class="form-control" id="Adress" type="text" value="@Model.Adress">
+                            </div>
+                            <span asp-validation-for="Adress" class="d-block text-danger"></span>
+
+                            <div class="form-group">
+                                <label for="CurrentPassword"><i class="icon-lock"></i> <b>Mevcut Şifre</b></label>
+                                <input name="currentPassword" class="form-control" id="CurrentPassword" type="password" placeholder="Mevcut Şifre">
+                            </div>
+                           
+
+                            <div class="form-group">
+                                <label for="NewPassword"><i class="icon-lock"></i> <b>Yeni Şifre</b></label>
+                                <input name="newPassword" class="form-control" id="NewPassword" type="password" placeholder="Yeni Şifre">
+                            </div>
+                         
+
+                            <div class="form-group">
+                                <label for="ConfirmNewPassword"><i class="icon-lock"></i> <b>Yeni Şifre Tekrarı</b></label>
+                                <input name="confirmNewPassword" class="form-control" id="ConfirmNewPassword" type="password" placeholder="Yeni Şifre Tekrarı">
+                            </div>
+                           
+
+                            <div class="form-group">
+                                <button type="submit" class="btn pull-right">Güncelle</button>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="~/bookshop/js/bootstrap.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+    <script src="~/bookshop/js/jquery.fitvids.js"></script>
+    <script src="~/bookshop/js/jquery.sequence-min.js"></script>
+    <script src="~/bookshop/js/jquery.bxslider.js"></script>
+    <script src="~/bookshop/js/main-menu.js"></script>
+    <script src="~/bookshop/js/template.js"></script>
+
+    <!-- Visual Studio Browser Link -->
+    <script type="text/javascript" src="/_vs/browserLink" async="async" id="__browserLink_initializationData" data-requestId="94d26255ba864dd4a775651a1abc8c7f" data-requestMappingFromServer="false" data-connectUrl="http://localhost:59093/deaaa7dca0754b9bb3d397de5a6be320/browserLink"></script>
+    <!-- End Browser Link -->
+    <script src="/_framework/aspnetcore-browser-refresh.js"></script>
+</body>
+</html>

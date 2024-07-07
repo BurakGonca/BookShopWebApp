@@ -3,6 +3,7 @@ using BookShopWebApp.Models.Account;
 using BS.BLL.Managers.Concrete;
 using BS.DTO.Concrete;
 using BS.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
@@ -153,6 +154,94 @@ namespace BookShopWebApp.Controllers
 
 
 
-    }
+		[HttpGet]
+		[Authorize(Roles = "Customer")]
+		public async Task<IActionResult> Edit()
+		{
+			var userId = _userManager.GetUserId(HttpContext.User);
+
+			var user = await _userManager.FindByIdAsync(userId);
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+
+			var model = new UserViewModel
+			{
+				UserId = user.Id,
+				Name = user.Name,
+				Surname = user.Surname,
+				Adress = user.Adress,
+				Email = user.Email
+			};
+
+			return View(model);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Customer")]
+		public async Task<IActionResult> Edit(UserViewModel model, string currentPassword, string newPassword, string confirmNewPassword)
+		{
+			ModelState.Remove("Password");
+			ModelState.Remove("ConfirmPassword");
+
+			ModelState.Remove("newPassword");
+			ModelState.Remove("currentPassword");
+			ModelState.Remove("confirmNewPassword");
+
+
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+
+			var user = await _userManager.FindByIdAsync(model.UserId.ToString());
+			if (user == null)
+			{
+				return View(model);
+			}
+
+			if (!string.IsNullOrEmpty(currentPassword) && !string.IsNullOrEmpty(newPassword) && !string.IsNullOrEmpty(confirmNewPassword))
+			{
+				if (newPassword != confirmNewPassword)
+				{
+					ViewBag.ErrorMessage = "Yeni şifre ile yeni şifre tekrarı aynı değil.";
+					return View(model);
+				}
+
+				var passwordChangeResult = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+				if (!passwordChangeResult.Succeeded)
+				{
+					ViewBag.ErrorMessage = "Şifrenizde en az 1 büyük harf, en az 1 küçük harf ve en az 1 özel karakter olmalıdır";
+					return View(model);
+				}
+			}
+			user.Name = model.Name;
+			user.Surname = model.Surname;
+			user.Adress = model.Adress;
+			user.Email = model.Email;
+
+			var result = await _userManager.UpdateAsync(user);
+			if (result.Succeeded)
+			{
+
+				await _signInManager.RefreshSignInAsync(user);
+				TempData["SuccessMessage"] = "Kullanıcı bilgileriniz başarıyla güncellendi.";
+				return RedirectToAction("Index", "Home");
+			}
+
+			foreach (var error in result.Errors)
+			{
+				ModelState.AddModelError(string.Empty, error.Description);
+			}
+
+			return View(model);
+		}
+
+
+
+	}
 }
 

@@ -16,11 +16,14 @@ namespace BS.Entities.Concrete
 
         public DateTime OrderDate { get; set; }
 
+		//sonradan eklediğim kolon
+		public double TotalPrice { get; set; }
 
 
-        //iliskiler
 
-        public int PaymentId { get; set; }
+		//iliskiler
+
+		public int? PaymentId { get; set; }
         public Payment Payment { get; set; }
 
 
@@ -30,11 +33,11 @@ namespace BS.Entities.Concrete
 
 
 
-        public int ShoppingCartId { get; set; }
+        public int? ShoppingCartId { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
 
 
-        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public IEnumerable<OrderDetail>? OrderDetails { get; set; }
 
 
     }

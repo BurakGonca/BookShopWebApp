@@ -1,4 +1,6 @@
-﻿namespace BookShopWebApp.Areas.Models
+﻿using BookShopWebApp.Areas.Admin.Models;
+
+namespace BookShopWebApp.Areas.Models
 {
 	public class OrderViewModel
 	{
@@ -8,6 +10,8 @@
 		public DateTime OrderDate { get; set; }
 
 
+		public double TotalPrice { get; set; }
+
 
 		//iliskiler
 
@@ -16,8 +20,8 @@
 
 
 
-		//public int UserId { get; set; }
-		//public UserViewModel User { get; set; }
+		public int UserId { get; set; }
+		public UserViewModel User { get; set; }
 
 
 

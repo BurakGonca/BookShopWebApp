@@ -49,7 +49,7 @@ namespace BS.DAL.Profiles
 
 
             CreateMap<ShoppingCartBookDto, ShoppingCartBook>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            //.ForMember(dest => dest.Id, opt => opt.Ignore()) //silme işleminde ıd'yi yakalamamı engelliyordu
             .ForMember(dest => dest.Book, opt => opt.MapFrom(src => src.Book))
             .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart));
 

@@ -31,19 +31,24 @@
                 <div class="extras">
                     <ul>
                        
+                        
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="shopping-cart-items" style="margin-top:47px; font-size:17px;">
+                            <li class="shopping-cart-items" style="margin-top: 47px; font-size: 17px;">
                                 <a asp-action="Index" asp-controller="ShoppingCart">
                                     <i class="glyphicon glyphicon-shopping-cart icon-white"></i>
                                 </a>
                             </li>
-                            <li style="margin-top:47px; font-size:16px;">
-                                <span><b>Hoşgeldin @User.Identity.Name</b></span>
-                                <a asp-controller="User" asp-action="Logout">
-                                  
-                                    <i class="bi bi-x-circle-fill"></i>
+
+                            <li class="dropdown" style="margin-top: 47px; font-size: 16px;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <b>Hoşgeldin @User.Identity.Name</b> <i class="bi bi-caret-down-fill"></i>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-area="" asp-controller="Order" asp-action="Index">Siparişlerim</a></li>
+                                    <li><a asp-controller="User" asp-action="Edit">Profilim</a></li>
+                                    <li><a asp-controller="User" asp-action="Logout" >Çıkış Yap</a></li>
+                                </ul>
                             </li>
                         }
                         else

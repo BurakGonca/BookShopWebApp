@@ -1,0 +1,86 @@
+﻿@model List<BookShopWebApp.Models.OrderViewModel>
+
+@{
+	ViewData["Title"] = "Siparişlerim";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section section-breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Siparişlerim</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+@if (TempData["Message"] is not null)
+{
+	<div class="alert alert-success" role="alert" style="text-align: center;">
+		@TempData["Message"]
+	</div>
+}
+
+@if (!Model.Any())
+{
+	<div class="container" style="min-height: 400px;">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<img src="~/bookshop/img/order.jpg" alt="Empty Order" class="img-fluid" style="max-width: 600px; margin-top: 20px;">
+
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="container" style="margin-top: 20px;">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Sıra No</th>
+					<th>Sipariş Tarihi</th>
+					<th>Toplam Fiyat</th>
+					<th>Sipariş İptali</th>
+				</tr>
+			</thead>
+			<tbody>
+				@{
+					int rowNumber = 1;
+
+				}
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>@rowNumber</td>
+						<td>@item.OrderDate.ToShortDateString()</td>
+						<td>@item.TotalPrice TL</td>
+						<td>
+							<a asp-action="Delete" asp-route-id="@item.Id">İptal Et <i class="bi bi-x-circle-fill"></i></a>
+						</td>
+
+					</tr>
+					rowNumber++;
+
+				}
+			</tbody>
+		</table>
+
+
+	</div>
+}
+
+<style>
+	body {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
+	.img-fluid {
+		max-width: 100%;
+		height: auto;
+	}
+
+</style>

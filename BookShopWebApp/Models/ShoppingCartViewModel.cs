@@ -26,10 +26,8 @@ namespace BookShopWebApp.Models
 
 
 
-        //yardımcı proplar
+		
 
-        //public int? BookId { get; set; }
-        //public BookViewModel? Book { get; set; }
 
-    }
+	}
 }

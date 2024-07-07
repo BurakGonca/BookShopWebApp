@@ -13,13 +13,19 @@ namespace BS.DAL.Profiles
 	{
         public OrderProfile()
         {
+            CreateMap<Order, OrderDto>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
+                .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
+                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
+                .ForMember(dest => dest.Payment, opt => opt.MapFrom(src => src.Payment))
+                .ReverseMap();
 
-			
 
             CreateMap<AppUser, AppUserDto>()
                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
                .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
                .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => src.Orders))
+               .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments))
                .ReverseMap();
 
             CreateMap<OrderDetail, OrderDetailDto>()
@@ -29,18 +35,11 @@ namespace BS.DAL.Profiles
                 .ReverseMap();
 
 
-            CreateMap<Order, OrderDto>()
-                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
-                .ForMember(dest => dest.ShoppingCart, opt => opt.MapFrom(src => src.ShoppingCart))
-                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
-                .ForMember(dest => dest.Payment, opt => opt.MapFrom(src => src.Payment))
-                .ReverseMap();
-
-
+            
             CreateMap<ShoppingCart, ShoppingCartDto>()
                 .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => src.AppUser))
                 .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
-
+                .ForMember(dest => dest.ShoppingCartBooks, opt => opt.MapFrom(src => src.ShoppingCartBooks))
                 .ReverseMap();
 
             CreateMap<Payment, PaymentDto>()

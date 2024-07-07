@@ -140,36 +140,32 @@
 
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" asp-controller="User" asp-action="Index">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Üyeler</p>
-									</a>
-								</li>
-								<li class="nav-item">
 									<a class="nav-link" asp-controller="Category" asp-action="Index">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Kategoriler</p>
 									</a>
 								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="User" asp-action="Index">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Üyeler</p>
+									</a>
+								</li>
+								
 
 								<li class="nav-item">
-									<a class="nav-link" asp-controller="Order" asp-action="Index">
+									<a class="nav-link" asp-area="admin" asp-controller="Order" asp-action="Index">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Siparişler</p>
 									</a>
 								</li>
-								<li class="nav-item">
+								@* <li class="nav-item">
 									<a class="nav-link" asp-controller="Comment" asp-action="Index">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Yorumlar</p>
 									</a>
-								</li>
-								<li class="nav-item">
-									<a href="../layout/collapsed-sidebar.html" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>sadfs</p>
-									</a>
-								</li>
+								</li> *@
+								
 							</ul>
 						</li>
 

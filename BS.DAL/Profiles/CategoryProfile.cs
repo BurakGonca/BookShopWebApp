@@ -45,13 +45,13 @@ namespace BS.DAL.Profiles
 
 
 
+            //buraya dikkat bunun yüzünden category/edit hata veriyor çünkü Idyi ignore ettiğim için
+            
+           // CreateMap<CategoryDto, Category>()
+           //.ForMember(dest => dest.Id, opt => opt.Ignore())
+           //.ForMember(dest => dest.Books, opt => opt.Ignore());
 
-
-            CreateMap<CategoryDto, Category>()
-           .ForMember(dest => dest.Id, opt => opt.Ignore())
-           .ForMember(dest => dest.Books, opt => opt.Ignore());
-
-            CreateMap<Category, CategoryDto>();
+           // CreateMap<Category, CategoryDto>();
 
 
         }

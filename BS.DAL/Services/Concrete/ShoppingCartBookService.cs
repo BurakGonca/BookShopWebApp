@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BS.DAL.Context;
 using BS.DAL.Profiles;
 using BS.DAL.Repositories.Concrete;
 using BS.DAL.Services.Abstract;
@@ -14,7 +15,8 @@ namespace BS.DAL.Services.Concrete
 {
 	public class ShoppingCartBookService :Service<ShoppingCartBook, ShoppingCartBookDto>
 	{
-		public ShoppingCartBookService(ShoppingCartBookRepo repo) : base(repo)
+        
+        public ShoppingCartBookService(ShoppingCartBookRepo repo) : base(repo)
 		{
 			MapperConfiguration config = new MapperConfiguration(config => {
 				Profile profile = new ShoppingCartBookProfile();

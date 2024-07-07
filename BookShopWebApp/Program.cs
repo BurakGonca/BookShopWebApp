@@ -86,6 +86,10 @@ namespace BookShopWebApp
 			builder.Services.AddScoped<ShoppingCartBookService>();
 			builder.Services.AddScoped<ShoppingCartBookManager>();
 
+			builder.Services.AddScoped<OrderRepo>();
+			builder.Services.AddScoped<OrderService>();
+			builder.Services.AddScoped<OrderManager>();
+
 
 			// Validation ekleme
 			builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

@@ -38,15 +38,16 @@ namespace BS.DAL.Profiles
 			CreateMap<ShoppingCartBook, ShoppingCartBookDto>().ForMember(dest => dest.Book, opt => opt.Ignore()).ReverseMap();
 
 
+			//buraya dikkat bunun yüzünden book/edit hata veriyor çünkü Idyi ignore ettiğim için
 
-            CreateMap<BookDto, Book>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.Category, opt => opt.Ignore())
-            .ForMember(dest => dest.Comments, opt => opt.Ignore())
-            .ForMember(dest => dest.OrderDetails, opt => opt.Ignore())
-            .ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore());
+			//CreateMap<BookDto, Book>()
+			//.ForMember(dest => dest.Id, opt => opt.Ignore())
+			//.ForMember(dest => dest.Category, opt => opt.Ignore())
+			//.ForMember(dest => dest.Comments, opt => opt.Ignore())
+			//.ForMember(dest => dest.OrderDetails, opt => opt.Ignore())
+			//.ForMember(dest => dest.ShoppingCartBooks, opt => opt.Ignore());
 
-            CreateMap<Book, BookDto>();
+			CreateMap<Book, BookDto>();
 
 
         }

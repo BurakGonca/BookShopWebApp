@@ -4,6 +4,7 @@ using BS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BS.DAL.Migrations
 {
     [DbContext(typeof(BSDbContext))]
-    partial class BSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240706165010_ordertable nullabble")]
+    partial class ordertablenullabble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +114,7 @@ namespace BS.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "253d25f1-c8c8-49c7-99ba-5f15344fbbe3",
+                            ConcurrencyStamp = "baaef123-2673-405d-b168-5d86cec770dd",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             Gender = (byte)3,
@@ -119,7 +122,7 @@ namespace BS.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOAbIFWN63H1LgGxCBETamtyL8LRhjv2tLW1F/4aTlJp1EpevYwTcjkcC7WFpYsj6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBRdVLXIpRoUa4M7rfHEsJFWSLUza8bzIWzMmr0XFd1snoQ07Z1RVBvoPYhp7c+PnA==",
                             PhoneNumberConfirmed = false,
                             Surname = "Admin",
                             TwoFactorEnabled = false,
@@ -260,11 +263,8 @@ namespace BS.DAL.Migrations
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShoppingCartId")
+                    b.Property<int>("ShoppingCartId")
                         .HasColumnType("int");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -278,8 +278,7 @@ namespace BS.DAL.Migrations
                         .HasFilter("[PaymentId] IS NOT NULL");
 
                     b.HasIndex("ShoppingCartId")
-                        .IsUnique()
-                        .HasFilter("[ShoppingCartId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Orders");
                 });
@@ -615,7 +614,9 @@ namespace BS.DAL.Migrations
 
                     b.HasOne("BS.Entities.Concrete.ShoppingCart", "ShoppingCart")
                         .WithOne("Order")
-                        .HasForeignKey("BS.Entities.Concrete.Order", "ShoppingCartId");
+                        .HasForeignKey("BS.Entities.Concrete.Order", "ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
 

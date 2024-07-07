@@ -8,10 +8,11 @@
 		public DateTime OrderDate { get; set; }
 
 
+        public double TotalPrice { get; set; }
 
-		//iliskiler
+        //iliskiler
 
-		public int PaymentId { get; set; }
+        public int PaymentId { get; set; }
 		public PaymentViewModel Payment { get; set; }
 
 

@@ -11,7 +11,11 @@ namespace BookShopWebApp.Models
 		public int BookId { get; set; }
 		public BookViewModel? Book { get; set; }
 
-      
+
+
+		//yardımcı
+
+		public int Id { get; set; }
 
 
 	}

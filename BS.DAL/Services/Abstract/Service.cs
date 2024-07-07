@@ -49,7 +49,7 @@ namespace BS.DAL.Services.Abstract
 
 		public int Delete(TDto dto)
 		{
-			TEntity entity = _mapper.Map<TEntity>(dto);
+			TEntity entity = _mapper.Map<TEntity>(dto); //mapledikten sonra ıd yi sıfırladı
 			return _repo.Delete(entity);
 		}
 
@@ -73,7 +73,7 @@ namespace BS.DAL.Services.Abstract
 
 		public int Update(TDto dto)
 		{
-			TEntity entity = _mapper.Map<TEntity>(dto);
+			TEntity entity = _mapper.Map<TEntity>(dto); 
 			return _repo.Update(entity);
 		}
 

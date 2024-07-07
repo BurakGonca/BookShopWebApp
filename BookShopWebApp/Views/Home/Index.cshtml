@@ -8,6 +8,12 @@
 
 @model List<BookViewModel>
 
+@if (TempData["SuccessMessage"] is not null)
+{
+	<div class="alert alert-success" role="alert" style="text-align: center;">
+		@TempData["SuccessMessage"]
+	</div>
+}
 
 <div class="homepage-slider">
 	<div id="sequence">
@@ -63,7 +69,7 @@
 						</div>
 
 						<div class="title">
-							<h3><a href="page-product-details.html">@book.BookName</a></h3>
+							<h3><a href="#">@book.BookName</a></h3>
 							<h4>@book.AuthorName @book.AuthorSurname</h4>
 						</div>
 
