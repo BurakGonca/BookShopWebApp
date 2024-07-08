@@ -177,13 +177,30 @@ namespace BookShopWebApp.Controllers
 			}
 
 
+			//if (shoppingCartBooks is not null)
+			//{
+			//	foreach (var item in shoppingCartBooks)
+			//	{
+			//		_shoppingCartBookManager.Delete(item);
+			//	}
+			//}
+
 			if (shoppingCartBooks is not null)
 			{
 				foreach (var item in shoppingCartBooks)
 				{
-					_shoppingCartBookManager.Delete(item);
+					// Varlığı silmeden önce izlenip izlenmedigi kontrolü
+					var existingEntity = _shoppingCartBookManager.GetAll()
+						.FirstOrDefault(scb => scb.Id == item.Id);
+
+					if (existingEntity != null)
+					{
+						_shoppingCartBookManager.Delete(existingEntity);
+					}
 				}
 			}
+
+
 
 			TempData["Message"] = "Teşekkürler siparişiniz alınmıştır, siparişlerim bölümünden inceleyebilirsiniz";
 

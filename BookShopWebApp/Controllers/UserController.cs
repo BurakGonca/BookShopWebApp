@@ -45,6 +45,7 @@ namespace BookShopWebApp.Controllers
         public async Task<IActionResult> Register(UserViewModel model)
         {
             ModelState.Remove("UserId");
+            ModelState.Remove("OrderDetails");
 
             if (!ModelState.IsValid)
             {
@@ -189,6 +190,7 @@ namespace BookShopWebApp.Controllers
 			ModelState.Remove("newPassword");
 			ModelState.Remove("currentPassword");
 			ModelState.Remove("confirmNewPassword");
+			ModelState.Remove("OrderDetails");
 
 
 			if (!ModelState.IsValid)
@@ -222,6 +224,7 @@ namespace BookShopWebApp.Controllers
 			user.Surname = model.Surname;
 			user.Adress = model.Adress;
 			user.Email = model.Email;
+            user.UserName = user.Name;
 
 			var result = await _userManager.UpdateAsync(user);
 			if (result.Succeeded)
